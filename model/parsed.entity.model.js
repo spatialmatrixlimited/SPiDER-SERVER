@@ -52,16 +52,6 @@ var parsedEntitySchema = new ParsedEntitySchema({
 	}],
 	document_status: { type: Number, default: 1},
 	created: Date,
-	modified_by: {
-        id: {
-            type: ObjectId,
-            ref: 'User'
-        },
-        firstname: String,
-        lastname: String,
-        email: String,
-        mobile: String
-	},
 	modified: Date
 });
 
