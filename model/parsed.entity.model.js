@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var ParsedEntitySchema = mongoose.Schema;
 
 var parsedEntitySchema = new ParsedEntitySchema({
+	property_id: String,
 	entity: {
 		boys_quarter: Number,
 		meter_number: String,
@@ -15,10 +16,6 @@ var parsedEntitySchema = new ParsedEntitySchema({
 		meter_type: String,
 		has_signage: Boolean
 	},
-	document_status: Number,
-	created: Date,
-	property_id: String,
-	modified: Date,
 	location: {
 		whatthreewords: String,
 		coordinates: {
@@ -52,7 +49,20 @@ var parsedEntitySchema = new ParsedEntitySchema({
 		},
 		title: String,
 		snapshot_position: String
-    }]
+	}],
+	document_status: { type: Number, default: 1},
+	created: Date,
+	modified_by: {
+        id: {
+            type: ObjectId,
+            ref: 'User'
+        },
+        firstname: String,
+        lastname: String,
+        email: String,
+        mobile: String
+	},
+	modified: Date
 });
 
 

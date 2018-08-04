@@ -66,6 +66,7 @@ app.use(headers);
 parserJob.processStreet();
 parserJob.processProperty();
 parserJob.processEntity();
+parserJob.processUpdateEntity();
 
 //start server and listen on specified port
 app.listen(port, function () {

@@ -47,7 +47,8 @@ let processStreet = () => {
                         'location.coordinates.longitude': doc[index].location.coordinates[0],
                         'location.coordinates.latitude': doc[index].location.coordinates[1],
                         'location.whatthreewords': doc[index].location.whatthreewords,
-                        'enumerator': doc[index].enumerator
+                        'enumerator': doc[index].enumerator,
+                        'document_status': doc[index].document_status
                     });
 
                     newRecord.save().then(_streetData => {
@@ -127,7 +128,8 @@ let processProperty = () => {
                         'location.coordinates.latitude': doc[index].location.coordinates[1],
                         'location.whatthreewords': doc[index].location.whatthreewords,
                         'enumerator': doc[index].enumerator,
-                        'contact': doc[index].contact
+                        'contact': doc[index].contact,
+                        'document_status': doc[index].document_status
                     });
 
                     newRecord.save().then(_propertyData => {
@@ -207,6 +209,7 @@ let processEntity = () => {
                     }))
 
                     newRecord = new ParsedEntity({
+                        'property_id': doc[index].property_id,
                         'entity': doc[index].entity,
                         'property_photos': photos,
                         'created': doc[index].created,
@@ -219,7 +222,8 @@ let processEntity = () => {
                         'location.whatthreewords': doc[index].location.whatthreewords,
                         'enumerator': doc[index].enumerator,
                         'contact': doc[index].contact,
-                        'document_owner': doc[index].document_owner
+                        'document_owner': doc[index].document_owner,
+                        'document_status': doc[index].document_status
                     });
 
                     newRecord.save().then(_propertyData => {
@@ -259,6 +263,48 @@ let processEntity = () => {
     });
 }
 
+let processUpdateEntity = () => {
+    console.log('Parser Engine Started -  Entity (Update)');
+    EntityRecord.find({}, (err, doc) => {
+        if (err) {
+            console.log('An error occured');
+        } else {
+            if (doc.length > 0) {
+                console.log(`${doc.length} Entity Records Update to Process`);
+                let totalRecords = doc.length;
+                let total = doc.length;
+                let index = 0;
+                let prgInterval = setInterval(() => {
+
+                    ParsedEntity.findOneAndUpdate({
+                        'entity.entity_id': doc[index].entity.entity_id
+                    }, {
+                        'property_id': doc[index].property_id
+                    }, (err, doc) => {
+                        if (err || !doc) {
+                            console.log('Unable to update Entity Record');
+                        } else {
+                            console.log('Updated Entity Record ' + index + 1);
+                        }
+                    });
+
+                    index += 1;
+                    console.log(`Record ${index} processed`);
+                    totalRecords -= 1;
+                    if (totalRecords === 0) {
+                        console.log(`${index} out of ${total} records processed`);
+                        clearInterval(prgInterval);
+                    }
+
+                }, 500);
+            } else {
+                console.log("No entity data to process");
+            }
+        }
+    });
+}
+
 exports.processStreet = processStreet;
 exports.processProperty = processProperty;
 exports.processEntity = processEntity;
+exports.processUpdateEntity = processUpdateEntity;

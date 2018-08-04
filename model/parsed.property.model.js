@@ -49,7 +49,8 @@ var parsedPropertySchema = new ParsedPropertySchema({
 		url: String,
 		snapshot_position: String
 	}],
-	entities: Number
+	entities: Number,
+	document_status: { type: Number, default: 1}
 
 });
 

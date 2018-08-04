@@ -40,7 +40,8 @@ var parsedStreetSchema = new ParsedStreetSchema(
             lastname: String,
             email: String,
             mobile: String
-        }
+        },
+        document_status: { type: Number, default: 1},
     }
 );
 
