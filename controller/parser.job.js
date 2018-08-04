@@ -76,7 +76,7 @@ let processStreet = () => {
 
                     index += 1;
                     console.log('Street Round ' + index);
-                    totalRecords -= 1;
+                    //totalRecords -= 1;
 
                 });
                 /*  let streetTimer = setInterval(()=>{
