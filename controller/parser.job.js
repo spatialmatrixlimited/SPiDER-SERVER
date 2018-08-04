@@ -75,7 +75,7 @@ let processStreet = () => {
                     index += 1;
                     console.log('Street Round ' + index);
                     totalRecords -= 1;
-                    if (totalRecords === 0) {
+                    if (totalRecords < 1) {
                         console.log(`${index} out of ${total} STREET records processed`);
                         clearInterval(streetTimer);
                     }
@@ -160,7 +160,7 @@ let processProperty = () => {
                     index += 1;
                     console.log('Property Round ' + index);
                     totalRecords -= 1;
-                    if (totalRecords === 0) {
+                    if (totalRecords < 1) {
                         console.log(`${index} out of ${total} records processed`);
                         clearInterval(propertyTimer);
                     }
@@ -257,7 +257,7 @@ let processEntity = () => {
                     index += 1;
                     console.log('Entity Round ' + index);
                     totalRecords -= 1;
-                    if (totalRecords === 0) {
+                    if (totalRecords < 1) {
                         console.log(`${index} out of ${total} records processed`);
                         clearInterval(entityTimer);
                     }
@@ -293,19 +293,19 @@ let processUpdateEntity = () => {
                         if (err || !_doc) {
                             console.log('Unable to update Entity Record');
                         } else {
-                            console.log(`Record ${index+1} processed`);
+                            console.log(`Entity Record ${index+1} processed`);
                             console.log('Updated Entity Record ' + index + 1);
                         }
                     });
 
                     index += 1;
                     totalRecords -= 1;
-                    if (totalRecords === 0) {
+                    if (totalRecords < 1) {
                         console.log(`${index} out of ${total} records processed`);
                         clearInterval(entityUpdateTimer);
                     }
 
-                },2000);
+                },3000);
             } else {
                 console.log("No entity data to process");
             }
