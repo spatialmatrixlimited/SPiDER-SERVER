@@ -54,6 +54,7 @@ let processStreet = () => {
 
                         newRecord.save().then(_streetData => {
                             if (_streetData) {
+                                console.log(_streetData)
                                 StreetRecord.findOneAndUpdate({
                                     '_id': doc[index]._id
                                 }, {
