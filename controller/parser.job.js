@@ -63,6 +63,7 @@ let processStreet = () => {
                                 if (err || !newData) {
                                     console.log('An error occurred while updating record with parsed = true');
                                 } else {
+                                    console.log(`Record ${index+1} processed`);
                                     console.log('Street Record updated successfully with parsed = true');
                                 }
                             });
@@ -72,14 +73,13 @@ let processStreet = () => {
                     });
 
                     index += 1;
-                    console.log(`Record ${index} processed`);
                     totalRecords -= 1;
                     if (totalRecords === 0) {
                         console.log(`${index} out of ${total} records processed`);
                         clearInterval(prgInterval);
                     }
 
-                }, 3000);
+                }, 1000);
             } else {
                 console.log("No street data to process");
             }
@@ -144,6 +144,7 @@ let processProperty = () => {
                                 if (err || !newData) {
                                     console.log('An error occurred while updating record with parsed = true');
                                 } else {
+                                    console.log(`Record ${index+1} processed`);
                                     console.log('Property Record updated successfully with parsed = true');
                                 }
                             });
@@ -154,7 +155,6 @@ let processProperty = () => {
                     });
 
                     index += 1;
-                    console.log(`Record ${index} processed`);
                     totalRecords -= 1;
                     if (totalRecords === 0) {
                         console.log(`${index} out of ${total} records processed`);
@@ -238,6 +238,7 @@ let processEntity = () => {
                                 if (err || !newData) {
                                     console.log('An error occurred while updating record with parsed = true');
                                 } else {
+                                    console.log(`${index+1} out of ${total} records processed`);
                                     console.log('Entity Record updated successfully with parsed = true');
                                 }
                             });
@@ -277,19 +278,23 @@ let processUpdateEntity = () => {
                 let prgInterval = setInterval(() => {
 
                     ParsedEntity.findOneAndUpdate({
-                        'entity.entity_id': doc[index].entity.entity_id
+                        '$and': [{'entity.entity_id': doc[index].entity.entity_id}, {
+                            'property_id': {
+                                '$exists': false
+                            }
+                        }]
                     }, {
                         'property_id': doc[index].property_id
                     }, (err, doc) => {
                         if (err || !doc) {
                             console.log('Unable to update Entity Record');
                         } else {
+                            console.log(`Record ${index+1} processed`);
                             console.log('Updated Entity Record ' + index + 1);
                         }
                     });
 
                     index += 1;
-                    console.log(`Record ${index} processed`);
                     totalRecords -= 1;
                     if (totalRecords === 0) {
                         console.log(`${index} out of ${total} records processed`);
