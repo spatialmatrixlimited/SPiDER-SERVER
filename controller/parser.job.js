@@ -21,7 +21,6 @@ let processStreet = () => {
             }
         }]
     }, (err, doc) => {
-        console.log(doc);
         if (err) {
             console.log('An error occured');
         } else {
@@ -54,6 +53,8 @@ let processStreet = () => {
 
                     newRecord.save().then((_streetData) => {
                         if (_streetData) {
+                            console.log(index);
+                            console.log(doc);
                             StreetRecord.findOneAndUpdate({
                                 '_id': doc[index]['_id']
                             }, {
