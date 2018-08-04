@@ -64,7 +64,7 @@ let processStreet = () => {
                                 if (err || !newData) {
                                     console.log('An error occurred while updating record with parsed = true');
                                 } else {
-                                    console.log(`Street Record ${index+1} processed`);
+                                    console.log(`Street Record ${index} processed`);
                                 }
                             });
                         } else {
