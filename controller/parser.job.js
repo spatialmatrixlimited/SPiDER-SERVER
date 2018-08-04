@@ -31,7 +31,7 @@ let processStreet = () => {
                 let index = 0;
                 let newRecord;
                 let photos;
-                while (totalRecords > 0) {
+                let streetTimer = setInterval(()=>{
                     photos = [];
                     doc[index]['street_photos'].forEach(photo => photos.push({
                         url: photo.url,
@@ -51,7 +51,7 @@ let processStreet = () => {
                         'document_status': doc[index].document_status
                     });
 
-                    newRecord.save().then(_streetData => {
+                    newRecord.save().then((_streetData) => {
                         if (_streetData) {
                             StreetRecord.findOneAndUpdate({
                                 '_id': doc[index]._id
@@ -69,7 +69,7 @@ let processStreet = () => {
                         } else {
                             console.log(`Street Record NOT processed`);
                         }
-                    }).catch(err => {
+                    }).catch((err) => {
                         console.error(err);
                     });
 
@@ -77,8 +77,10 @@ let processStreet = () => {
                     totalRecords -= 1;
                     if (totalRecords === 0) {
                         console.log(`${index} out of ${total} STREET records processed`);
+                        clearInterval(streetTimer);
                     }
-                }
+                },2000);
+
             } else {
                 console.log("No street data to process");
             }
@@ -111,7 +113,7 @@ let processProperty = () => {
                 let newRecord;
                 let photos;
 
-                while (totalRecords > 0) {
+                let propertyTimer = setInterval(()=>{
                     photos = [];
                     doc[index]['property_photos'].forEach(photo => photos.push({
                         url: photo.url,
@@ -132,7 +134,7 @@ let processProperty = () => {
                         'document_status': doc[index].document_status
                     });
 
-                    newRecord.save().then(_propertyData => {
+                    newRecord.save().then((_propertyData) => {
                         if (_propertyData) {
                             PropertyRecord.findOneAndUpdate({
                                 '_id': doc[index]._id
@@ -151,7 +153,7 @@ let processProperty = () => {
                             console.log(`PROPERTY Record NOT processed`);
                         }
 
-                    }).catch(err => {
+                    }).catch((err) => {
                         console.error(err);
                     });
 
@@ -159,8 +161,9 @@ let processProperty = () => {
                     totalRecords -= 1;
                     if (totalRecords === 0) {
                         console.log(`${index} out of ${total} records processed`);
+                        clearInterval(streetTimer);
                     }
-                }
+                },2000);
 
             } else {
                 console.log("No property data to process");
@@ -194,7 +197,7 @@ let processEntity = () => {
                 let newRecord;
                 let photos;
 
-                while (totalRecords > 0) {
+                let entityTimer = setInterval(()=>{
                     photos = [];
                     doc[index]['property_photos'].forEach(photo => photos.push({
                         url: photo.url,
@@ -227,7 +230,7 @@ let processEntity = () => {
                         'document_status': doc[index].document_status
                     });
 
-                    newRecord.save().then(_propertyData => {
+                    newRecord.save().then((_propertyData)=> {
                         if (_propertyData) {
                             EntityRecord.findOneAndUpdate({
                                 '_id': doc[index]._id
@@ -246,7 +249,7 @@ let processEntity = () => {
                             console.log(`ENTITY records NOT processed`);
                         }
 
-                    }).catch(err => {
+                    }).catch((err) => {
                         console.error(err);
                     });
 
@@ -255,8 +258,9 @@ let processEntity = () => {
                     totalRecords -= 1;
                     if (totalRecords === 0) {
                         console.log(`${index} out of ${total} records processed`);
+                        clearInterval(entityTimer);
                     }
-                }
+                },2000);
 
             } else {
                 console.log("No entity data to process");
@@ -276,7 +280,7 @@ let processUpdateEntity = () => {
                 let totalRecords = doc.length;
                 let total = doc.length;
                 let index = 0;
-                while (totalRecords > 0) {
+                let entityUpdateTimer = setInterval(()=>{
 
                     ParsedEntity.findOneAndUpdate({
                         'entity.entity_id': doc[index].entity.entity_id
@@ -297,9 +301,10 @@ let processUpdateEntity = () => {
                     totalRecords -= 1;
                     if (totalRecords === 0) {
                         console.log(`${index} out of ${total} records processed`);
+                        clearInterval(entityUpdateTimer);
                     }
 
-                }
+                },2000);
             } else {
                 console.log("No entity data to process");
             }
