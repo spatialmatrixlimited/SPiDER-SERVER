@@ -295,8 +295,9 @@ let processUpdateEntity = () => {
                         }]
                     }, {
                         'property_id': doc[index].property_id
-                    }, (err, doc) => {
-                        if (err || !doc) {
+                    },{new: true}, (err, _doc) => {
+                        console.log(_doc)
+                        if (err || !_doc) {
                             console.log('Unable to update Entity Record');
                         } else {
                             console.log(`Record ${index+1} processed`);
