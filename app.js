@@ -75,9 +75,9 @@ mongoose.connection.on('open', function () {
     console.log('SPiDER Database is connected');
     setTimeout(() => {
         parserJob.processStreet();
-        parserJob.processProperty();
-        parserJob.processEntity();
-        parserJob.processUpdateEntity();
+        //parserJob.processProperty();
+        //parserJob.processEntity();
+        //parserJob.processUpdateEntity();
     }, 5000);
 });
 

@@ -26,37 +26,36 @@ let processStreet = () => {
         } else {
             if (doc.length > 0) {
                 console.log(`${doc.length} STREET Records to Process`);
-                let totalRecords = doc.length;
-                let total = doc.length;
+                /* let totalRecords = doc.length;
+                let total = doc.length; */
                 let index = 0;
                 let newRecord;
                 let photos;
-                let streetTimer = setInterval(()=>{
+
+                doc.forEach(_doc => {
                     photos = [];
-                    doc[index]['street_photos'].forEach(photo => photos.push({
+                    _doc.street_photos.forEach(photo => photos.push({
                         url: photo.url,
                         snapshot_position: photo.snapshot_position
-                    }))
+                    }));
 
                     newRecord = new ParsedStreet({
-                        'street': doc[index].street,
+                        'street': _doc.street,
                         'street_photos': photos,
-                        'created': doc[index].created,
-                        'properties': doc[index].properties,
-                        'location.type': doc[index].location.type,
-                        'location.coordinates.longitude': doc[index].location.coordinates[0],
-                        'location.coordinates.latitude': doc[index].location.coordinates[1],
-                        'location.whatthreewords': doc[index].location.whatthreewords,
-                        'enumerator': doc[index].enumerator,
-                        'document_status': doc[index].document_status
+                        'created': _doc.created,
+                        'properties': _doc.properties,
+                        'location.type': _doc.location.type,
+                        'location.coordinates.longitude': _doc.location.coordinates[0],
+                        'location.coordinates.latitude': _doc.location.coordinates[1],
+                        'location.whatthreewords': _doc.location.whatthreewords,
+                        'enumerator': _doc.enumerator,
+                        'document_status': _doc.document_status
                     });
 
                     newRecord.save().then((_streetData) => {
                         if (_streetData) {
-                            console.log(index);
-                            console.log(doc);
                             StreetRecord.findOneAndUpdate({
-                                '_id': doc[index]['_id']
+                                '_id': _doc._id
                             }, {
                                 'parsed': true
                             }, {
@@ -74,14 +73,64 @@ let processStreet = () => {
                     }).catch((err) => {
                         console.error(err);
                     });
+
                     index += 1;
                     console.log('Street Round ' + index);
                     totalRecords -= 1;
-                    if (totalRecords < 1) {
-                        console.log(`${index} out of ${total} STREET records processed`);
-                        clearInterval(streetTimer);
-                    }
-                },2000);
+
+                });
+                /*  let streetTimer = setInterval(()=>{
+
+                     photos = [];
+                     doc[index]['street_photos'].forEach(photo => photos.push({
+                         url: photo.url,
+                         snapshot_position: photo.snapshot_position
+                     }));
+
+                     newRecord = new ParsedStreet({
+                         'street': doc[index].street,
+                         'street_photos': photos,
+                         'created': doc[index].created,
+                         'properties': doc[index].properties,
+                         'location.type': doc[index].location.type,
+                         'location.coordinates.longitude': doc[index].location.coordinates[0],
+                         'location.coordinates.latitude': doc[index].location.coordinates[1],
+                         'location.whatthreewords': doc[index].location.whatthreewords,
+                         'enumerator': doc[index].enumerator,
+                         'document_status': doc[index].document_status
+                     });
+
+                     newRecord.save().then((_streetData) => {
+                         if (_streetData) {
+                             StreetRecord.findOneAndUpdate({
+                                 '_id': doc[index]['_id']
+                             }, {
+                                 'parsed': true
+                             }, {
+                                 new: true
+                             }, (err, newData) => {
+                                 if (err || !newData) {
+                                     console.log('An error occurred while updating record with parsed = true');
+                                 } else {
+                                     console.log(`Street Record ${index+1} processed`);
+                                 }
+                             });
+                         } else {
+                             console.log(`Street Record NOT processed`);
+                         }
+                     }).catch((err) => {
+                         console.error(err);
+                     });
+
+                     index += 1;
+                     console.log('Street Round ' + index);
+                     totalRecords -= 1;
+                     if (totalRecords < 1) {
+                         console.log(`${index} out of ${total} STREET records processed`);
+                         clearInterval(streetTimer);
+                     }
+
+                 },2000); */
 
             } else {
                 console.log("No street data to process");
@@ -115,7 +164,7 @@ let processProperty = () => {
                 let newRecord;
                 let photos;
 
-                let propertyTimer = setInterval(()=>{
+                let propertyTimer = setInterval(() => {
                     photos = [];
                     doc[index]['property_photos'].forEach(photo => photos.push({
                         url: photo.url,
@@ -166,7 +215,7 @@ let processProperty = () => {
                         console.log(`${index} out of ${total} records processed`);
                         clearInterval(propertyTimer);
                     }
-                },2000);
+                }, 2000);
 
             } else {
                 console.log("No property data to process");
@@ -200,7 +249,7 @@ let processEntity = () => {
                 let newRecord;
                 let photos;
 
-                let entityTimer = setInterval(()=>{
+                let entityTimer = setInterval(() => {
                     photos = [];
                     doc[index]['property_photos'].forEach(photo => photos.push({
                         url: photo.url,
@@ -233,7 +282,7 @@ let processEntity = () => {
                         'document_status': doc[index].document_status
                     });
 
-                    newRecord.save().then((_propertyData)=> {
+                    newRecord.save().then((_propertyData) => {
                         if (_propertyData) {
                             EntityRecord.findOneAndUpdate({
                                 '_id': doc[index]['_id']
@@ -263,7 +312,7 @@ let processEntity = () => {
                         console.log(`${index} out of ${total} records processed`);
                         clearInterval(entityTimer);
                     }
-                },2000);
+                }, 2000);
 
             } else {
                 console.log("No entity data to process");
@@ -283,7 +332,7 @@ let processUpdateEntity = () => {
                 let totalRecords = doc.length;
                 let total = doc.length;
                 let index = 0;
-                let entityUpdateTimer = setInterval(()=>{
+                let entityUpdateTimer = setInterval(() => {
 
                     ParsedEntity.findOneAndUpdate({
                         'entity.entity_id': doc[index].entity.entity_id
@@ -307,7 +356,7 @@ let processUpdateEntity = () => {
                         clearInterval(entityUpdateTimer);
                     }
 
-                },3000);
+                }, 3000);
             } else {
                 console.log("No entity data to process");
             }
