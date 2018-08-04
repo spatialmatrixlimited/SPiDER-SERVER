@@ -68,7 +68,7 @@ let processStreet = () => {
                                     }
                                 });
                             }
-                        }, err => {
+                        }).catch(err => {
                             console.error(err);
                         });
 
