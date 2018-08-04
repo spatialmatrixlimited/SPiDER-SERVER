@@ -63,6 +63,7 @@ let processStreet = () => {
                                 if (err || !newData) {
                                     console.log('An error occurred while updating record with parsed = true');
                                 } else {
+                                    index += 1;
                                     console.log(`Street Record ${index} processed`);
                                 }
                             });
@@ -106,7 +107,6 @@ let processProperty = () => {
                 let photos;
 
                 doc.forEach(_doc=>{
-                    index += 1;
                     photos = [];
                     _doc.property_photos.forEach(photo => photos.push({
                         url: photo.url,
@@ -139,6 +139,7 @@ let processProperty = () => {
                                 if (err || !newData) {
                                     console.log('An error occurred while updating record with parsed = true');
                                 } else {
+                                    index += 1;
                                     console.log(`PROPERTY Record ${index} processed`);
                                 }
                             });
@@ -181,7 +182,6 @@ let processEntity = () => {
                 let photos;
 
                 doc.forEach((_doc) => {
-                    index += 1;
                     photos = [];
                     _doc.property_photos.forEach(photo => photos.push({
                         url: photo.url,
@@ -226,6 +226,7 @@ let processEntity = () => {
                                 if (err || !newData) {
                                     console.log('An error occurred while updating record with parsed = true');
                                 } else {
+                                    index += 1;
                                     console.log(`ENTITY Record ${index} processed`);
                                 }
                             });
@@ -255,7 +256,6 @@ let processUpdateEntity = () => {
                 console.log(`${doc.length} Entity Records Update to Process`);
                 let index = 0;
                 doc.forEach((_doc) => {
-                    index += 1;
                     ParsedEntity.findOneAndUpdate({
                         'entity.entity_id': _doc.entity.entity_id
                     }, {
@@ -266,6 +266,7 @@ let processUpdateEntity = () => {
                         if (err || !__doc) {
                             console.log('Unable to update Entity Record');
                         } else {
+                            index += 1;
                             console.log('Updated Entity Record ' + index);
                         }
                     });
