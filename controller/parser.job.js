@@ -53,7 +53,6 @@ let processStreet = () => {
 
                     newRecord.save().then(_streetData => {
                         if (_streetData) {
-                            console.log(_streetData)
                             StreetRecord.findOneAndUpdate({
                                 '_id': doc[index]._id
                             }, {
@@ -280,19 +279,12 @@ let processUpdateEntity = () => {
                 while (totalRecords > 0) {
 
                     ParsedEntity.findOneAndUpdate({
-                        '$and': [{
-                            'entity.entity_id': doc[index].entity.entity_id
-                        }, {
-                            'property_id': {
-                                '$exists': false
-                            }
-                        }]
+                        'entity.entity_id': doc[index].entity.entity_id
                     }, {
                         'property_id': doc[index].property_id
                     }, {
                         new: true
                     }, (err, _doc) => {
-                        console.log(_doc)
                         if (err || !_doc) {
                             console.log('Unable to update Entity Record');
                         } else {
