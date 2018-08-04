@@ -21,6 +21,7 @@ let processStreet = () => {
             }
         }]
     }, (err, doc) => {
+        console.log(doc);
         if (err) {
             console.log('An error occured');
         } else {
