@@ -160,18 +160,7 @@ let processProperty = () => {
 
 let processEntity = () => {
     console.log('Parser Engine Started -  Entity');
-    EntityRecord.find({
-        $or: [{
-            'parsed': {
-                '$exists': false
-            }
-        }, {
-            'parsed': {
-                '$exists': true,
-                '$eq': false
-            }
-        }]
-    }, (err, doc) => {
+    EntityRecord.find({}, (err, doc) => {
         if (err) {
             console.log('An error occured');
         } else {
