@@ -32,52 +32,58 @@ let processStreet = () => {
                 let newRecord;
                 let photos;
                 let prgInterval = setInterval(() => {
-                    photos = [];
-                    doc[index]['street_photos'].forEach(photo => photos.push({
-                        url: photo.url,
-                        snapshot_position: photo.snapshot_position
-                    }))
+                    if (doc[index]._id) {
+                        photos = [];
+                        doc[index]['street_photos'].forEach(photo => photos.push({
+                            url: photo.url,
+                            snapshot_position: photo.snapshot_position
+                        }))
 
-                    newRecord = new ParsedStreet({
-                        'street': doc[index].street,
-                        'street_photos': photos,
-                        'created': doc[index].created,
-                        'properties': doc[index].properties,
-                        'location.type': doc[index].location.type,
-                        'location.coordinates.longitude': doc[index].location.coordinates[0],
-                        'location.coordinates.latitude': doc[index].location.coordinates[1],
-                        'location.whatthreewords': doc[index].location.whatthreewords,
-                        'enumerator': doc[index].enumerator,
-                        'document_status': doc[index].document_status
-                    });
+                        newRecord = new ParsedStreet({
+                            'street': doc[index].street,
+                            'street_photos': photos,
+                            'created': doc[index].created,
+                            'properties': doc[index].properties,
+                            'location.type': doc[index].location.type,
+                            'location.coordinates.longitude': doc[index].location.coordinates[0],
+                            'location.coordinates.latitude': doc[index].location.coordinates[1],
+                            'location.whatthreewords': doc[index].location.whatthreewords,
+                            'enumerator': doc[index].enumerator,
+                            'document_status': doc[index].document_status
+                        });
 
-                    newRecord.save().then(_streetData => {
-                        if (_streetData) {
-                            StreetRecord.findOneAndUpdate({
-                                '_id': doc[index]._id
-                            }, {
-                                'parsed': true
-                            }, {
-                                new: true
-                            }, (err, newData) => {
-                                if (err || !newData) {
-                                    console.log('An error occurred while updating record with parsed = true');
-                                } else {
-                                    console.log(`Record ${index+1} processed`);
-                                    console.log('Street Record updated successfully with parsed = true');
-                                }
-                            });
+                        newRecord.save().then(_streetData => {
+                            if (_streetData) {
+                                StreetRecord.findOneAndUpdate({
+                                    '_id': doc[index]._id
+                                }, {
+                                    'parsed': true
+                                }, {
+                                    new: true
+                                }, (err, newData) => {
+                                    if (err || !newData) {
+                                        console.log('An error occurred while updating record with parsed = true');
+                                    } else {
+                                        console.log(`Street Record ${index+1} processed`);
+                                        console.log('Street Record updated successfully with parsed = true');
+                                    }
+                                });
+                            }
+                        }, err => {
+                            console.error(err);
+                        });
+
+                        index += 1;
+                        totalRecords -= 1;
+                        if (totalRecords === 0) {
+                            console.log(`${index} out of ${total} records processed`);
+                            clearInterval(prgInterval);
                         }
-                    }, err => {
-                        console.error(err);
-                    });
 
-                    index += 1;
-                    totalRecords -= 1;
-                    if (totalRecords === 0) {
-                        console.log(`${index} out of ${total} records processed`);
-                        clearInterval(prgInterval);
                     }
+
+
+
 
                 }, 1000);
             } else {
@@ -112,54 +118,58 @@ let processProperty = () => {
                 let newRecord;
                 let photos;
                 let prgInterval = setInterval(() => {
-                    photos = [];
-                    doc[index]['property_photos'].forEach(photo => photos.push({
-                        url: photo.url,
-                        snapshot_position: photo.snapshot_position
-                    }))
 
-                    newRecord = new ParsedProperty({
-                        'property': doc[index].property,
-                        'property_photos': photos,
-                        'created': doc[index].created,
-                        'entities': doc[index].entities,
-                        'location.type': doc[index].location.type,
-                        'location.coordinates.longitude': doc[index].location.coordinates[0],
-                        'location.coordinates.latitude': doc[index].location.coordinates[1],
-                        'location.whatthreewords': doc[index].location.whatthreewords,
-                        'enumerator': doc[index].enumerator,
-                        'contact': doc[index].contact,
-                        'document_status': doc[index].document_status
-                    });
+                    if (doc[index]._id) {
+                        photos = [];
+                        doc[index]['property_photos'].forEach(photo => photos.push({
+                            url: photo.url,
+                            snapshot_position: photo.snapshot_position
+                        }))
 
-                    newRecord.save().then(_propertyData => {
-                        if (_propertyData) {
-                            PropertyRecord.findOneAndUpdate({
-                                '_id': doc[index]._id
-                            }, {
-                                'parsed': true
-                            }, {
-                                new: true
-                            }, (err, newData) => {
-                                if (err || !newData) {
-                                    console.log('An error occurred while updating record with parsed = true');
-                                } else {
-                                    console.log(`Record ${index+1} processed`);
-                                    console.log('Property Record updated successfully with parsed = true');
-                                }
-                            });
+                        newRecord = new ParsedProperty({
+                            'property': doc[index].property,
+                            'property_photos': photos,
+                            'created': doc[index].created,
+                            'entities': doc[index].entities,
+                            'location.type': doc[index].location.type,
+                            'location.coordinates.longitude': doc[index].location.coordinates[0],
+                            'location.coordinates.latitude': doc[index].location.coordinates[1],
+                            'location.whatthreewords': doc[index].location.whatthreewords,
+                            'enumerator': doc[index].enumerator,
+                            'contact': doc[index].contact,
+                            'document_status': doc[index].document_status
+                        });
+
+                        newRecord.save().then(_propertyData => {
+                            if (_propertyData) {
+                                PropertyRecord.findOneAndUpdate({
+                                    '_id': doc[index]._id
+                                }, {
+                                    'parsed': true
+                                }, {
+                                    new: true
+                                }, (err, newData) => {
+                                    if (err || !newData) {
+                                        console.log('An error occurred while updating record with parsed = true');
+                                    } else {
+                                        console.log(`Property Record ${index+1} processed`);
+                                        console.log('Property Record updated successfully with parsed = true');
+                                    }
+                                });
+                            }
+
+                        }, err => {
+                            console.error(err);
+                        });
+
+                        index += 1;
+                        totalRecords -= 1;
+                        if (totalRecords === 0) {
+                            console.log(`${index} out of ${total} records processed`);
+                            clearInterval(prgInterval);
                         }
-
-                    }, err => {
-                        console.error(err);
-                    });
-
-                    index += 1;
-                    totalRecords -= 1;
-                    if (totalRecords === 0) {
-                        console.log(`${index} out of ${total} records processed`);
-                        clearInterval(prgInterval);
                     }
+
 
                 }, 3000);
             } else {
@@ -194,67 +204,71 @@ let processEntity = () => {
                 let newRecord;
                 let photos;
                 let prgInterval = setInterval(() => {
-                    photos = [];
-                    doc[index]['property_photos'].forEach(photo => photos.push({
-                        url: photo.url,
-                        snapshot_position: photo.snapshot_position,
-                        title: photo.title,
-                        location: {
-                            type: photo.location.type,
-                            coordinates: {
-                                longitude: photo.location.coordinates[0],
-                                latitude: photo.location.coordinates[1]
-                            }
-                        }
-                    }))
 
-                    newRecord = new ParsedEntity({
-                        'property_id': doc[index].property_id,
-                        'entity': doc[index].entity,
-                        'property_photos': photos,
-                        'created': doc[index].created,
-                        'modified': doc[index].modified,
-                        'modified_by': doc[index].modified_by,
-                        'entities': doc[index].entities,
-                        'location.type': doc[index].location.type,
-                        'location.coordinates.longitude': doc[index].location.coordinates[0],
-                        'location.coordinates.latitude': doc[index].location.coordinates[1],
-                        'location.whatthreewords': doc[index].location.whatthreewords,
-                        'enumerator': doc[index].enumerator,
-                        'contact': doc[index].contact,
-                        'document_owner': doc[index].document_owner,
-                        'document_status': doc[index].document_status
-                    });
-
-                    newRecord.save().then(_propertyData => {
-                        if (_propertyData) {
-                            EntityRecord.findOneAndUpdate({
-                                '_id': doc[index]._id
-                            }, {
-                                'parsed': true
-                            }, {
-                                new: true
-                            }, (err, newData) => {
-                                if (err || !newData) {
-                                    console.log('An error occurred while updating record with parsed = true');
-                                } else {
-                                    console.log(`${index+1} out of ${total} records processed`);
-                                    console.log('Entity Record updated successfully with parsed = true');
+                    if (doc[index]._id) {
+                        photos = [];
+                        doc[index]['property_photos'].forEach(photo => photos.push({
+                            url: photo.url,
+                            snapshot_position: photo.snapshot_position,
+                            title: photo.title,
+                            location: {
+                                type: photo.location.type,
+                                coordinates: {
+                                    longitude: photo.location.coordinates[0],
+                                    latitude: photo.location.coordinates[1]
                                 }
-                            });
+                            }
+                        }))
+
+                        newRecord = new ParsedEntity({
+                            'property_id': doc[index].property_id,
+                            'entity': doc[index].entity,
+                            'property_photos': photos,
+                            'created': doc[index].created,
+                            'modified': doc[index].modified,
+                            'modified_by': doc[index].modified_by,
+                            'entities': doc[index].entities,
+                            'location.type': doc[index].location.type,
+                            'location.coordinates.longitude': doc[index].location.coordinates[0],
+                            'location.coordinates.latitude': doc[index].location.coordinates[1],
+                            'location.whatthreewords': doc[index].location.whatthreewords,
+                            'enumerator': doc[index].enumerator,
+                            'contact': doc[index].contact,
+                            'document_owner': doc[index].document_owner,
+                            'document_status': doc[index].document_status
+                        });
+
+                        newRecord.save().then(_propertyData => {
+                            if (_propertyData) {
+                                EntityRecord.findOneAndUpdate({
+                                    '_id': doc[index]._id
+                                }, {
+                                    'parsed': true
+                                }, {
+                                    new: true
+                                }, (err, newData) => {
+                                    if (err || !newData) {
+                                        console.log('An error occurred while updating record with parsed = true');
+                                    } else {
+                                        console.log(`${index+1} out of ${total} records processed`);
+                                        console.log('Entity Record updated successfully with parsed = true');
+                                    }
+                                });
+                            }
+
+                        }, err => {
+                            console.error(err);
+                        });
+
+                        index += 1;
+                        console.log(`Record ${index} processed`);
+                        totalRecords -= 1;
+                        if (totalRecords === 0) {
+                            console.log(`${index} out of ${total} records processed`);
+                            clearInterval(prgInterval);
                         }
-
-                    }, err => {
-                        console.error(err);
-                    });
-
-                    index += 1;
-                    console.log(`Record ${index} processed`);
-                    totalRecords -= 1;
-                    if (totalRecords === 0) {
-                        console.log(`${index} out of ${total} records processed`);
-                        clearInterval(prgInterval);
                     }
+
 
                 }, 3000);
             } else {
@@ -278,7 +292,9 @@ let processUpdateEntity = () => {
                 let prgInterval = setInterval(() => {
 
                     ParsedEntity.findOneAndUpdate({
-                        '$and': [{'entity.entity_id': doc[index].entity.entity_id}, {
+                        '$and': [{
+                            'entity.entity_id': doc[index].entity.entity_id
+                        }, {
                             'property_id': {
                                 '$exists': false
                             }
