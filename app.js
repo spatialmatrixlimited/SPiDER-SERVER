@@ -63,10 +63,7 @@ app.use(headers);
     parserJob.processEntity();
 },(15 * (60 * 1000)));  */
 
-parserJob.processStreet();
-parserJob.processProperty();
-parserJob.processEntity();
-parserJob.processUpdateEntity();
+
 
 //start server and listen on specified port
 app.listen(port, function () {
@@ -76,12 +73,18 @@ app.listen(port, function () {
 
 mongoose.connection.on('open', function () {
     console.log('SPiDER Database is connected');
+    setTimeout(() => {
+        parserJob.processStreet();
+        parserJob.processProperty();
+        parserJob.processEntity();
+        parserJob.processUpdateEntity();
+    }, 5000);
 });
 
 // If the connection throws an error
 mongoose.connection.on('error', (err) => {
     console.log('Mongoose default connection error: ' + err);
-    clearInterval(chronos);
+    //clearInterval(chronos);
 });
 
 // When the connection is disconnected
