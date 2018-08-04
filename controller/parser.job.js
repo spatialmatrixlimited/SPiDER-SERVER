@@ -106,7 +106,7 @@ let processProperty = () => {
                 let newRecord;
                 let photos;
 
-                doc.forEach(_doc=>{
+                doc.forEach(_doc => {
                     photos = [];
                     _doc.property_photos.forEach(photo => photos.push({
                         url: photo.url,
@@ -170,7 +170,7 @@ let processEntity = () => {
                 let newRecord;
                 let photos;
 
-                doc.forEach((_doc) => {
+                doc.forEach(_doc => {
                     photos = [];
                     _doc.property_photos.forEach(photo => photos.push({
                         url: photo.url,
@@ -203,22 +203,10 @@ let processEntity = () => {
                         'document_status': _doc.document_status
                     });
 
-                    newRecord.save().then((_propertyData) => {
-                        if (_propertyData) {
-                            EntityRecord.findOneAndUpdate({
-                                '_id': _doc._id
-                            }, {
-                                'parsed': true
-                            }, {
-                                new: true
-                            }, (err, newData) => {
-                                if (err || !newData) {
-                                    console.log('An error occurred while updating record with parsed = true');
-                                } else {
-                                    index += 1;
-                                    console.log(`ENTITY Record ${index} processed`);
-                                }
-                            });
+                    newRecord.save().then((_entityData) => {
+                        if (_entityData) {
+                            index += 1;
+                            console.log(`ENTITY Record ${index} processed`);
                         } else {
                             console.log(`ENTITY records NOT processed`);
                         }
