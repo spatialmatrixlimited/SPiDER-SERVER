@@ -54,7 +54,7 @@ let processStreet = () => {
                     newRecord.save().then((_streetData) => {
                         if (_streetData) {
                             StreetRecord.findOneAndUpdate({
-                                '_id': doc[index]._id
+                                '_id': doc[index]['_id']
                             }, {
                                 'parsed': true
                             }, {
@@ -137,7 +137,7 @@ let processProperty = () => {
                     newRecord.save().then((_propertyData) => {
                         if (_propertyData) {
                             PropertyRecord.findOneAndUpdate({
-                                '_id': doc[index]._id
+                                '_id': doc[index]['_id']
                             }, {
                                 'parsed': true
                             }, {
@@ -161,7 +161,7 @@ let processProperty = () => {
                     totalRecords -= 1;
                     if (totalRecords === 0) {
                         console.log(`${index} out of ${total} records processed`);
-                        clearInterval(streetTimer);
+                        clearInterval(propertyTimer);
                     }
                 },2000);
 
@@ -233,7 +233,7 @@ let processEntity = () => {
                     newRecord.save().then((_propertyData)=> {
                         if (_propertyData) {
                             EntityRecord.findOneAndUpdate({
-                                '_id': doc[index]._id
+                                '_id': doc[index]['_id']
                             }, {
                                 'parsed': true
                             }, {
