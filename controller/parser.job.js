@@ -253,11 +253,9 @@ let processUpdateEntity = () => {
         } else {
             if (doc.length > 0) {
                 console.log(`${doc.length} Entity Records Update to Process`);
-                let totalRecords = doc.length;
-                let total = doc.length;
                 let index = 0;
                 doc.forEach((_doc) => {
-
+                    index += 1;
                     ParsedEntity.findOneAndUpdate({
                         'entity.entity_id': _doc.entity.entity_id
                     }, {
