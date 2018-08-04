@@ -72,8 +72,8 @@ let processStreet = () => {
                     }).catch((err) => {
                         console.error(err);
                     });
-
                     index += 1;
+                    console.log('Street Round ' + index);
                     totalRecords -= 1;
                     if (totalRecords === 0) {
                         console.log(`${index} out of ${total} STREET records processed`);
@@ -158,6 +158,7 @@ let processProperty = () => {
                     });
 
                     index += 1;
+                    console.log('Property Round ' + index);
                     totalRecords -= 1;
                     if (totalRecords === 0) {
                         console.log(`${index} out of ${total} records processed`);
@@ -254,7 +255,7 @@ let processEntity = () => {
                     });
 
                     index += 1;
-                    console.log(`Record ${index} processed`);
+                    console.log('Entity Round ' + index);
                     totalRecords -= 1;
                     if (totalRecords === 0) {
                         console.log(`${index} out of ${total} records processed`);
