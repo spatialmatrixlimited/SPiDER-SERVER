@@ -21,6 +21,7 @@ mongoose.connect(config.database, {
 });
 
 
+let chronos;
 
 var app = express();
 
@@ -57,12 +58,6 @@ app.use(bodyParser.json({
 // middleware to use for all requests headers
 app.use(headers);
 
-/* let chronos = setInterval(()=>{
-    parserJob.processStreet();
-    parserJob.processProperty();
-    parserJob.processEntity();
-},(15 * (60 * 1000)));  */
-
 
 
 //start server and listen on specified port
@@ -73,18 +68,22 @@ app.listen(port, function () {
 
 mongoose.connection.on('open', function () {
     console.log('SPiDER Database is connected');
-    setTimeout(() => {
-        parserJob.processStreet();
-        parserJob.processProperty();
-        parserJob.processEntity();
-        //parserJob.processUpdateEntity();
-    }, 5000);
+    /*  setTimeout(() => {
+         chronos = setInterval(() => {
+             parserJob.processStreet();
+             parserJob.processProperty();
+             parserJob.processEntity();
+         }, (15 * (60 * 60 * 1000)));
+     }, 5000); */
+    parserJob.processStreet();
+    parserJob.processProperty();
+    parserJob.processEntity();
 });
 
 // If the connection throws an error
 mongoose.connection.on('error', (err) => {
     console.log('Mongoose default connection error: ' + err);
-    //clearInterval(chronos);
+    clearInterval(chronos);
 });
 
 // When the connection is disconnected
