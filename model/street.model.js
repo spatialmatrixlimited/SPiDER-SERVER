@@ -89,7 +89,8 @@ var streetSchema = new StreetSchema({
         default: 0
     },
     signature: { type: String, default: '' },
-    parsed: { type: Boolean, default: false }
+    parsed: { type: Boolean, default: false },
+    parsed_photo: { type: Boolean, default: false }
 });
 
 module.exports = mongoose.model('StreetRecord', streetSchema, 'streets');

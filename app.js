@@ -68,7 +68,7 @@ app.listen(port, function () {
 
 mongoose.connection.on('open', function () {
     console.log('SPiDER Database is connected');
-    /*  setTimeout(() => {
+    /* setTimeout(() => {
          chronos = setInterval(() => {
              parserJob.processStreet();
              parserJob.processProperty();
@@ -78,6 +78,9 @@ mongoose.connection.on('open', function () {
     parserJob.processStreet();
     parserJob.processProperty();
     parserJob.processEntity();
+    //parserJob.processStreetPhotos();
+    //parserJob.processPropertyPhotos();
+    //parserJob.processEntityPhotos();
 });
 
 // If the connection throws an error
