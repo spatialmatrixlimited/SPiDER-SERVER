@@ -16,35 +16,37 @@ let PropertyPhoto = require('../model/property.photo.model');
 let EntityPhoto = require('../model/entity.photo.model');
 
 let fetchUniqueData = (docs, docType) => {
-    let unique = [];
-    let seen = [];
-    docs.forEach(doc => {
-        if (seen.length === 0) {
-            unique.push(doc);
-            seen.push(doc.street.street_id);
-        } else {
-            if(docType === 'street'){
-                if (seen.indexOf(doc.street.street_id) === -1) {
-                    unique.push(doc);
-                    seen.push(doc.street.street_id);
+    return new Promise(resolve=>{
+        let unique = [];
+        let seen = [];
+        docs.forEach(doc => {
+            if (seen.length === 0) {
+                unique.push(doc);
+                seen.push(doc.street.street_id);
+            } else {
+                if(docType === 'street'){
+                    if (seen.indexOf(doc.street.street_id) === -1) {
+                        unique.push(doc);
+                        seen.push(doc.street.street_id);
+                    }
                 }
-            }
-            if(docType === 'property'){
-                if (seen.indexOf(doc.property.building_serial_number) === -1) {
-                    unique.push(doc);
-                    seen.push(doc.street.building_serial_number);
+                if(docType === 'property'){
+                    if (seen.indexOf(doc.property.building_serial_number) === -1) {
+                        unique.push(doc);
+                        seen.push(doc.street.building_serial_number);
+                    }
                 }
-            }
-            if(docType === 'entity'){
-                if (seen.indexOf(doc.entity.entity_id) === -1) {
-                    unique.push(doc);
-                    seen.push(doc.entity.entity_id);
+                if(docType === 'entity'){
+                    if (seen.indexOf(doc.entity.entity_id) === -1) {
+                        unique.push(doc);
+                        seen.push(doc.entity.entity_id);
+                    }
                 }
+                
             }
-            
-        }
+        });
+        resolve(unique);
     });
-    return unique;
 }
 
 let processStreet = () => {
@@ -582,12 +584,15 @@ let processDuplicateStreet = () => {
                 console.log('No record returned for processing');
             } else {
                 console.log(`${docs.length} records for processing and save...`);
-                let uniqueData = fetchUniqueData(docs, 'street');
-                UniqueStreet.insertMany(uniqueData,(err, returned)=>{
-                    if(err)
-                        console.error(err);
-
-                    console.log(`${returned.length} unique records processed and saved!`);
+                fetchUniqueData(docs, 'street').then(uniqueData=>{
+                    UniqueStreet.insertMany(uniqueData,(err, returned)=>{
+                        if(err){
+                            console.error(err);
+                        }else{
+                            console.log(`${returned.length} unique records processed and saved!`);
+                        }
+                        
+                    });
                 });
             }
         }
