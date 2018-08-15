@@ -78,10 +78,14 @@ mongoose.connection.on('open', function () {
     //parserJob.processStreet();
     //parserJob.processProperty();
     //parserJob.processEntity();
-    parserJob.processBulkEntity();
+    //parserJob.processBulkEntity();
     //parserJob.processStreetPhotos();
     //parserJob.processPropertyPhotos();
     //parserJob.processEntityPhotos();
+
+    parserJob.processDuplicateStreet();
+    //parserJob.processDuplicateProperty();
+    //parserJob.processDuplicateEntity();
 });
 
 // If the connection throws an error
