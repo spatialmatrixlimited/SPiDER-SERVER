@@ -83,8 +83,8 @@ mongoose.connection.on('open', function () {
     //parserJob.processPropertyPhotos();
     //parserJob.processEntityPhotos();
 
-    parserJob.processDuplicateStreet();
-    //parserJob.processDuplicateProperty();
+    //parserJob.processDuplicateStreet();
+    parserJob.processDuplicateProperty();
     //parserJob.processDuplicateEntity();
 });
 

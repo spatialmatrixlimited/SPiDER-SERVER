@@ -609,13 +609,15 @@ let processDuplicateProperty = () => {
             } else {
                 console.log('PROPERTY RECORDS');
                 console.log(`${docs.length} records for processing and save...`);
-                let uniqueData = fetchUniqueData(docs, 'property');
-                UniqueProperty.insertMany(uniqueData,(err, returned)=>{
-                    if(err)
-                        console.error(err);
-
-                    console.log(`${returned.length} unique records processed and saved!`);
+                fetchUniqueData(docs, 'property').then(uniqueData=>{
+                    UniqueProperty.insertMany(uniqueData,(err, returned)=>{
+                        if(err)
+                            console.error(err);
+    
+                        console.log(`${returned.length} unique records processed and saved!`);
+                    });
                 });
+                
             }
         }
     });
@@ -632,12 +634,13 @@ let processDuplicateEntity = () => {
             } else {
                 console.log('ENTITY RECORDS');
                 console.log(`${docs.length} records for processing and save...`);
-                let uniqueData = fetchUniqueData(docs, 'entity');
-                UniqueEntity.insertMany(uniqueData,(err, returned)=>{
-                    if(err)
-                        console.error(err);
-
-                    console.log(`${returned.length} unique records processed and saved!`);
+                fetchUniqueData(docs, 'entity').then(uniqueData=>{
+                    UniqueEntity.insertMany(uniqueData,(err, returned)=>{
+                        if(err)
+                            console.error(err);
+    
+                        console.log(`${returned.length} unique records processed and saved!`);
+                    });
                 });
             }
         }
