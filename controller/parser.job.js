@@ -471,9 +471,77 @@ let processEntityPhotos = () => {
     });
 }
 
+
+let processBulkEntity = () => {
+    console.log('Parser Engine Started - Entity Records');
+    EntityRecord.find({}, (err, doc) => {
+        if (err) {
+            console.log('An error occured');
+        } else {
+            if (doc.length > 0) {
+                console.log(`${doc.length} ENTITY Records to Process`);
+                let newRecords = [];
+                let newRecord = {};
+                let photos;
+                let count = 0;
+                doc.forEach(_doc=>{
+                    count += 1;
+                    console.log(`Start with RECORD ${count} with ID: ${_doc._id}`);
+                    photos = [];
+                    _doc.property_photos.forEach(photo => photos.push({
+                        url: photo.url,
+                        snapshot_position: photo.snapshot_position
+                    }));
+
+                    newRecord = {
+                        'property_id': _doc.property_id,
+                        'entity': _doc.entity,
+                        'property_photos': photos,
+                        'created': _doc.created,
+                        'modified': _doc.modified,
+                        'modified_by': _doc.modified_by,
+                        'entities': _doc.entities,
+                        'location': {
+                            'type': _doc.location.type,
+                            'coordinates': {
+                                'longitude': _doc.location.coordinates[0],
+                                'latitude': _doc.location.coordinates[1]
+                            },
+                            'whatthreewords': _doc.location.whatth
+                        },
+                        'enumerator': _doc.enumerator,
+                        'contact': _doc.contact,
+                        'document_owner': _doc.document_owner,
+                        'document_status': _doc.document_status
+                    }
+
+                    newRecords.push(newRecord);
+                    console.log(`Done with RECORD ${count} with ID: ${_doc._id}`);
+
+                });
+
+                ParsedEntity.insertMany(newRecords,(err, docs)=>{
+                    if(!err){
+                        console.log('*************************************************************');
+                        console.log(`${docs.length} ENTITY PHOTO records parsed successfully!`);
+                        console.log('*************************************************************');
+                    }else{
+                        console.error(err);
+                    }
+                });
+               
+
+            } else {
+                console.log("No entity data to process");
+            }
+        }
+    });
+}
+
 exports.processStreet = processStreet;
 exports.processProperty = processProperty;
 exports.processEntity = processEntity;
+exports.processBulkEntity = processBulkEntity;
 exports.processUpdateEntity = processUpdateEntity;
 exports.processStreetPhotos = processStreetPhotos;
 exports.processEntityPhotos = processEntityPhotos;

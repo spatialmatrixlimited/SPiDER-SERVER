@@ -56,4 +56,4 @@ var parsedEntitySchema = new ParsedEntitySchema({
 });
 
 
-module.exports = mongoose.model('ParsedEntity', parsedEntitySchema, 'parsed_entities_fresh');
+module.exports = mongoose.model('ParsedEntity', parsedEntitySchema, 'parsed_entities_updated');
