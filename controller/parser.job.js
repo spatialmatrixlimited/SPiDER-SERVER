@@ -22,7 +22,16 @@ let fetchUniqueData = (docs, docType) => {
         docs.forEach(doc => {
             if (seen.length === 0) {
                 unique.push(doc);
-                seen.push(doc.street.street_id);
+                if(docType === 'street'){
+                    seen.push(doc.street.street_id);
+                }
+                if(docType === 'property'){
+                    seen.push(doc.property.building_serial_number);
+                }
+                if(docType === 'entity'){
+                    seen.push(doc.entity.entity_id);
+                }
+                
             } else {
                 if(docType === 'street'){
                     if (seen.indexOf(doc.street.street_id) === -1) {
@@ -33,7 +42,7 @@ let fetchUniqueData = (docs, docType) => {
                 if(docType === 'property'){
                     if (seen.indexOf(doc.property.building_serial_number) === -1) {
                         unique.push(doc);
-                        seen.push(doc.street.building_serial_number);
+                        seen.push(doc.property.building_serial_number);
                     }
                 }
                 if(docType === 'entity'){
