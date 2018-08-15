@@ -653,7 +653,7 @@ let processDuplicateEntity = () => {
                 });
             }
         }
-    });
+    }).skip(0).limit(30000);
 }
 
 exports.processStreet = processStreet;
