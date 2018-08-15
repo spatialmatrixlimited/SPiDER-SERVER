@@ -486,7 +486,6 @@ let processBulkEntity = () => {
                 let count = 0;
                 doc.forEach(_doc=>{
                     count += 1;
-                    console.log(`Start with RECORD ${count} with ID: ${_doc._id}`);
                     photos = [];
                     _doc.property_photos.forEach(photo => photos.push({
                         url: photo.url,
@@ -535,7 +534,7 @@ let processBulkEntity = () => {
                 console.log("No entity data to process");
             }
         }
-    });
+    }).skip(0).limit(20000);
 }
 
 exports.processStreet = processStreet;
