@@ -839,7 +839,7 @@ let processDuplicateProperty = () => {
 
             }
         }
-    }).skip(0).limit(20000);
+    }).skip(20000).limit(20000);
 }
 
 
