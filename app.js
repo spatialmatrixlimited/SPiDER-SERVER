@@ -75,8 +75,8 @@ mongoose.connection.on('open', function () {
              parserJob.processEntity();
          }, (15 * (60 * 60 * 1000)));
      }, 5000); */
-    parserJob.processStreet();
-    //parserJob.processProperty();
+    //parserJob.processStreet();
+    parserJob.processProperty();
     //parserJob.processEntity();
     //parserJob.processBulkEntity();
     //parserJob.processStreetPhotos();

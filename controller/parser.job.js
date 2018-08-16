@@ -177,7 +177,7 @@ let parseRecords = (docs, docType) => {
 }
 
 let processStreet = () => {
-    console.log('Parser Engine Started - Property');
+    console.log('Parser Engine Started - Street');
     StreetRecord.find({}, (err, docs) => {
         if (err) {
             console.log('An error occured');
@@ -208,7 +208,7 @@ let processStreet = () => {
 
 
 let processProperty = () => {
-    console.log('Parser Engine Started - Street');
+    console.log('Parser Engine Started - Property');
     PropertyRecord.find({}, (err, docs) => {
         if (err) {
             console.log('An error occured');
