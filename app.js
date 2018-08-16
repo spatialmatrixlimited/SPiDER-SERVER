@@ -75,15 +75,18 @@ mongoose.connection.on('open', function () {
              parserJob.processEntity();
          }, (15 * (60 * 60 * 1000)));
      }, 5000); */
+
     //parserJob.processStreet();
     //parserJob.processProperty();
-    parserJob.processEntity();
+    //parserJob.processEntity();
+
     //parserJob.processBulkEntity();
+
     //parserJob.processStreetPhotos();
     //parserJob.processPropertyPhotos();
     //parserJob.processEntityPhotos();
 
-    //parserJob.processDuplicateStreet();
+    parserJob.processDuplicateStreet();
     //parserJob.processDuplicateProperty();
     //parserJob.processDuplicateEntity();
 });
