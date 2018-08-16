@@ -234,7 +234,7 @@ let processProperty = () => {
                 console.log("No street data to process");
             }
         }
-    });
+    }).skip(0).limit(20000);
 }
 
 
