@@ -75,7 +75,7 @@ mongoose.connection.on('open', function () {
              parserJob.processEntity();
          }, (15 * (60 * 60 * 1000)));
      }, 5000); */
-    //parserJob.processStreet();
+    parserJob.processStreet();
     //parserJob.processProperty();
     //parserJob.processEntity();
     //parserJob.processBulkEntity();
@@ -85,7 +85,7 @@ mongoose.connection.on('open', function () {
 
     //parserJob.processDuplicateStreet();
     //parserJob.processDuplicateProperty();
-    parserJob.processDuplicateEntity();
+    //parserJob.processDuplicateEntity();
 });
 
 // If the connection throws an error

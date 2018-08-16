@@ -62,7 +62,7 @@ let parseRecords = (docs, docType) => {
     return new Promise(resolve => {
         let newRecord = {};
         let newRecords = [];
-        let photos = [];
+        let photos;
         let totalRecords = docs.length;
         if (docType === 'street') {
             console.log(`${totalRecords} ${docType} records for processing...`);
