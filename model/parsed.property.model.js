@@ -54,4 +54,4 @@ var parsedPropertySchema = new ParsedPropertySchema({
 
 });
 
-module.exports = mongoose.model('ParsedProperty', parsedPropertySchema, 'parsed_properties');
+module.exports = mongoose.model('ParsedProperty', parsedPropertySchema, 'parsed_properties_thursday');

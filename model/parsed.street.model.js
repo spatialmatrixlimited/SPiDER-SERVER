@@ -45,4 +45,4 @@ var parsedStreetSchema = new ParsedStreetSchema(
     }
 );
 
-module.exports = mongoose.model('ParsedStreet', parsedStreetSchema, 'parsed_streets');
+module.exports = mongoose.model('ParsedStreet', parsedStreetSchema, 'parsed_streets_thursday');

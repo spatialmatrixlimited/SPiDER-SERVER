@@ -45,4 +45,4 @@ var uniqueStreetSchema = new UniqueStreetSchema(
     }
 );
 
-module.exports = mongoose.model('UniqueStreet', uniqueStreetSchema, 'unique_streets');
+module.exports = mongoose.model('UniqueStreet', uniqueStreetSchema, 'unique_streets_thursday');
