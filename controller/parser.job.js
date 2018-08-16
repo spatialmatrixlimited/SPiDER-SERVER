@@ -240,7 +240,7 @@ let processProperty = () => {
 
 let processEntity = () => {
     console.log('Parser Engine Started - Entity');
-    PropertyRecord.find({}, (err, docs) => {
+    EntityRecord.find({}, (err, docs) => {
         if (err) {
             console.log('An error occured');
         } else {
@@ -265,7 +265,7 @@ let processEntity = () => {
                 console.log("No entity data to process");
             }
         }
-    });
+    }).skip(0).limit(35000);
 }
 
 let processStreetV1 = () => {
