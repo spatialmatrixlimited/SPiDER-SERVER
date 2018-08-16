@@ -265,7 +265,7 @@ let processEntity = () => {
                 console.log("No entity data to process");
             }
         }
-    }).skip(0).limit(25000);
+    }).skip(25000).limit(25000);
 }
 
 let processStreetV1 = () => {
