@@ -70,8 +70,8 @@ mongoose.connection.on('open',  ()=>{
     console.log('SPiDER Database is connected');
 
     parserJob.processStreetPhotos();
-    parserJob.processPropertyPhotos();
-    parserJob.processEntityPhotos();
+    //parserJob.processPropertyPhotos();
+    //parserJob.processEntityPhotos();
 
     //Street Parser Job
     /* parserJob.processStreet().then(value=>{
