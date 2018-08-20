@@ -88,23 +88,30 @@ mongoose.connection.on('open',  ()=>{
             parserJob.processPropertyPhotos();
         }).catch(err=>{
             console.error(err);
-        })
+        });
     }).catch(err=>{
         console.error(err);
     }); */
 
-
-    //Entity Parser Job
-    parserJob.processEntity().then(value=>{
+    parserJob.processDuplicateProperty().then(value=>{
         console.log('DONE: ' + value);
-        /* parserJob.processDuplicateEntity().then(value=>{
-            parserJob.processEntityPhotos();
-        }).catch(err=>{
-            console.error(err);
-        }); */
+        //parserJob.processPropertyPhotos();
     }).catch(err=>{
         console.error(err);
     });
+
+
+    //Entity Parser Job
+    /* parserJob.processEntity().then(value=>{
+        console.log('DONE: ' + value);
+         parserJob.processDuplicateEntity().then(value=>{
+            parserJob.processEntityPhotos();
+        }).catch(err=>{
+            console.error(err);
+        }); 
+    }).catch(err=>{
+        console.error(err);
+    }); */
 
 });
 
