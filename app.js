@@ -70,7 +70,7 @@ mongoose.connection.on('open',  ()=>{
     console.log('SPiDER Database is connected');
 
     //Street Parser Job
-    parserJob.processStreet().then(value=>{
+    /* parserJob.processStreet().then(value=>{
         parserJob.processDuplicateStreet().then(value=>{
             parserJob.processStreetPhotos();
         }).catch(err=>{
@@ -78,10 +78,10 @@ mongoose.connection.on('open',  ()=>{
         });
     }).catch(err=>{
         console.error(err);
-    });
+    }); */
 
 
-    /* //Property Parser Job
+    //Property Parser Job
     parserJob.processProperty().then(value=>{
         parserJob.processDuplicateProperty().then(value=>{
             parserJob.processPropertyPhotos();
@@ -103,7 +103,7 @@ mongoose.connection.on('open',  ()=>{
     }).catch(err=>{
         console.error(err);
     });
- */
+
 });
 
 
