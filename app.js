@@ -82,7 +82,7 @@ mongoose.connection.on('open',  ()=>{
 
 
     //Property Parser Job
-    parserJob.processProperty().then(value=>{
+   /*  parserJob.processProperty().then(value=>{
         parserJob.processDuplicateProperty().then(value=>{
             parserJob.processPropertyPhotos();
         }).catch(err=>{
@@ -90,10 +90,10 @@ mongoose.connection.on('open',  ()=>{
         })
     }).catch(err=>{
         console.error(err);
-    });
+    }); */
 
 
-   /*  //Entity Parser Job
+    //Entity Parser Job
     parserJob.processEntity().then(value=>{
         parserJob.processDuplicateEntity().then(value=>{
             parserJob.processEntityPhotos();
@@ -102,7 +102,7 @@ mongoose.connection.on('open',  ()=>{
         })
     }).catch(err=>{
         console.error(err);
-    }); */
+    });
 
 });
 
