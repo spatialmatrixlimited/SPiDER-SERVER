@@ -83,23 +83,22 @@ mongoose.connection.on('open',  ()=>{
  */
 
     //Property Parser Job
-    parserJob.processProperty().then(value=>{
+    /* parserJob.processProperty().then(value=>{
         console.log('DONE');
-        /* parserJob.processDuplicateProperty().then(value=>{
+        parserJob.processDuplicateProperty().then(value=>{
             parserJob.processPropertyPhotos();
         }).catch(err=>{
             console.error(err);
-        }); */
-    }).catch(err=>{
-        console.error(err);
-    });
-
-    /* parserJob.processDuplicateProperty().then(value=>{
-        console.log('DONE: ' + value);
-        //parserJob.processPropertyPhotos();
+        });
     }).catch(err=>{
         console.error(err);
     }); */
+
+    parserJob.processDuplicateProperty().then(value=>{
+        console.log('DONE: ' + value);
+    }).catch(err=>{
+        console.error(err);
+    });
 
 
     //Entity Parser Job

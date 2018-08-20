@@ -247,7 +247,7 @@ let processProperty = () => {
                     resolve(false);
                 }
             }
-        }).skip(30000).limit(20000);
+        });
     });
     
 }
