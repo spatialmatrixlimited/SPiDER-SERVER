@@ -93,7 +93,7 @@ mongoose.connection.on('open',  ()=>{
     });
 
 
-    //Entity Parser Job
+   /*  //Entity Parser Job
     parserJob.processEntity().then(value=>{
         parserJob.processDuplicateEntity().then(value=>{
             parserJob.processEntityPhotos();
@@ -102,7 +102,7 @@ mongoose.connection.on('open',  ()=>{
         })
     }).catch(err=>{
         console.error(err);
-    });
+    }); */
 
 });
 
