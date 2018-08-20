@@ -66,30 +66,46 @@ app.listen(port, function () {
 });
 
 
-mongoose.connection.on('open', function () {
+mongoose.connection.on('open',  ()=>{
     console.log('SPiDER Database is connected');
-    /* setTimeout(() => {
-         chronos = setInterval(() => {
-             parserJob.processStreet();
-             parserJob.processProperty();
-             parserJob.processEntity();
-         }, (15 * (60 * 60 * 1000)));
-     }, 5000); */
 
-    //parserJob.processStreet();
-    //parserJob.processProperty();
-    //parserJob.processEntity();
+    //Street Parser Job
+    parserJob.processStreet().then(value=>{
+        parserJob.processDuplicateStreet().then(value=>{
+            parserJob.processStreetPhotos();
+        }).catch(err=>{
+            console.error(err);
+        });
+    }).catch(err=>{
+        console.error(err);
+    });
 
-    //parserJob.processBulkEntity();
 
-    //parserJob.processStreetPhotos();
-    //parserJob.processPropertyPhotos();
-    //parserJob.processEntityPhotos();
+    /* //Property Parser Job
+    parserJob.processProperty().then(value=>{
+        parserJob.processDuplicateProperty().then(value=>{
+            parserJob.processPropertyPhotos();
+        }).catch(err=>{
+            console.error(err);
+        })
+    }).catch(err=>{
+        console.error(err);
+    });
 
-    //parserJob.processDuplicateStreet();
-    //parserJob.processDuplicateProperty();
-    parserJob.processDuplicateEntity();
+
+    //Entity Parser Job
+    parserJob.processEntity().then(value=>{
+        parserJob.processDuplicateEntity().then(value=>{
+            parserJob.processEntityPhotos();
+        }).catch(err=>{
+            console.error(err);
+        })
+    }).catch(err=>{
+        console.error(err);
+    });
+ */
 });
+
 
 // If the connection throws an error
 mongoose.connection.on('error', (err) => {

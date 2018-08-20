@@ -36,6 +36,7 @@ var parsedPropertySchema = new ParsedPropertySchema({
 		whatthreewords: String
 	},
 	enumerator: {
+		id: String,
 		firstname: String,
 		lastname: String,
 		email: String
@@ -54,4 +55,4 @@ var parsedPropertySchema = new ParsedPropertySchema({
 
 });
 
-module.exports = mongoose.model('ParsedProperty', parsedPropertySchema, 'parsed_properties_thursday');
+module.exports = mongoose.model('ParsedProperty', parsedPropertySchema, 'monday_parsed_properties');

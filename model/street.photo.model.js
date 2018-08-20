@@ -17,4 +17,4 @@ var streetPhotoSchema = new StreetPhotoSchema({
     }
 });
 
-module.exports = mongoose.model('StreetPhoto', streetPhotoSchema, 'street_photos');
+module.exports = mongoose.model('StreetPhoto', streetPhotoSchema, 'monday_street_photos');

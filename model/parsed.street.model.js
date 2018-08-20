@@ -36,6 +36,7 @@ var parsedStreetSchema = new ParsedStreetSchema(
             whatthreewords: String
         },
         enumerator: {
+            id: String,
             firstname: String,
             lastname: String,
             email: String,
@@ -45,4 +46,4 @@ var parsedStreetSchema = new ParsedStreetSchema(
     }
 );
 
-module.exports = mongoose.model('ParsedStreet', parsedStreetSchema, 'parsed_streets_thursday');
+module.exports = mongoose.model('ParsedStreet', parsedStreetSchema, 'monday_parsed_streets');

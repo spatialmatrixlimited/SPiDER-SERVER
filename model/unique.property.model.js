@@ -54,4 +54,4 @@ var uniquePropertySchema = new UniquePropertySchema({
 
 });
 
-module.exports = mongoose.model('UniqueProperty', uniquePropertySchema, 'unique_properties_thursday');
+module.exports = mongoose.model('UniqueProperty', uniquePropertySchema, 'monday_unique_properties');
