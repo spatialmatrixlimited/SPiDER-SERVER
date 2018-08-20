@@ -36,6 +36,7 @@ var uniqueStreetSchema = new UniqueStreetSchema(
             whatthreewords: String
         },
         enumerator: {
+            id: String,
             firstname: String,
             lastname: String,
             email: String,

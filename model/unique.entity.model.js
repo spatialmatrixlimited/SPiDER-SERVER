@@ -26,10 +26,10 @@ var uniqueEntitySchema = new UniqueEntitySchema({
 	},
 	document_owner: String,
 	enumerator: {
+		id: String,
 		firstname: String,
 		lastname: String,
 		mobile: String,
-		id: String,
 		email: String
 	},
 	contact: {

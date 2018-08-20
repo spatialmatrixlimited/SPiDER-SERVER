@@ -36,6 +36,7 @@ var uniquePropertySchema = new UniquePropertySchema({
 		whatthreewords: String
 	},
 	enumerator: {
+		id: String,
 		firstname: String,
 		lastname: String,
 		email: String
