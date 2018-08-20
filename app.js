@@ -93,12 +93,12 @@ mongoose.connection.on('open',  ()=>{
         console.error(err);
     }); */
 
-    parserJob.processDuplicateProperty().then(value=>{
+    /* parserJob.processDuplicateProperty().then(value=>{
         console.log('DONE: ' + value);
         //parserJob.processPropertyPhotos();
     }).catch(err=>{
         console.error(err);
-    });
+    }); */
 
 
     //Entity Parser Job
@@ -112,6 +112,13 @@ mongoose.connection.on('open',  ()=>{
     }).catch(err=>{
         console.error(err);
     }); */
+
+    parserJob.processDuplicateEntity().then(value=>{
+        console.log('Done: ' + value);
+        //parserJob.processEntityPhotos();
+    }).catch(err=>{
+        console.error(err);
+    }); 
 
 });
 
