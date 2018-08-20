@@ -69,6 +69,10 @@ app.listen(port, function () {
 mongoose.connection.on('open',  ()=>{
     console.log('SPiDER Database is connected');
 
+    parserJob.processStreetPhotos();
+    parserJob.processPropertyPhotos();
+    parserJob.processEntityPhotos();
+
     //Street Parser Job
     /* parserJob.processStreet().then(value=>{
         parserJob.processDuplicateStreet().then(value=>{
@@ -113,12 +117,12 @@ mongoose.connection.on('open',  ()=>{
         console.error(err);
     }); */
 
-    parserJob.processDuplicateEntity().then(value=>{
+    /* parserJob.processDuplicateEntity().then(value=>{
         console.log('Done: ' + value);
         //parserJob.processEntityPhotos();
     }).catch(err=>{
         console.error(err);
-    }); 
+    });  */
 
 });
 
