@@ -286,7 +286,7 @@ let processEntity = () => {
                     resolve(false);
                 }
             }
-        });
+        }).skip(0).limit(30000);
     });
    
 }
