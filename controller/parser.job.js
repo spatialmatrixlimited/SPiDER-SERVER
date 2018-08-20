@@ -558,7 +558,7 @@ let processDuplicateEntity = () => {
                     });
                 }
             }
-        });
+        }).skip(0).limit(40000);
     });
    
 }
