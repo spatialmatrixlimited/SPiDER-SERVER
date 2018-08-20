@@ -93,12 +93,7 @@ mongoose.connection.on('open',  ()=>{
     }).catch(err=>{
         console.error(err);
     }); */
-
-    parserJob.processDuplicateProperty().then(value=>{
-        console.log('DONE: ' + value);
-    }).catch(err=>{
-        console.error(err);
-    });
+    parserJob.processPropertyPhotos();
 
 
     //Entity Parser Job
