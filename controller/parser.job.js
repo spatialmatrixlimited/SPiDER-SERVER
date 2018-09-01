@@ -213,7 +213,6 @@ let processStreet = () => {
     }); 
 }
 
-
 let processProperty = () => {
     return new Promise((resolve, reject)=>{
         console.log('Parser Engine Started - Property');

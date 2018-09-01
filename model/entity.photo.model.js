@@ -21,4 +21,4 @@ var entityPhotoSchema = new EntityPhotoSchema({
     }
 });
 
-module.exports = mongoose.model('EntityPhoto', entityPhotoSchema, 'monday_entity_photos');
+module.exports = mongoose.model('EntityPhoto', entityPhotoSchema, 'weekend_entity_photos');

@@ -55,4 +55,4 @@ var parsedPropertySchema = new ParsedPropertySchema({
 
 });
 
-module.exports = mongoose.model('ParsedProperty', parsedPropertySchema, 'monday_parsed_properties');
+module.exports = mongoose.model('ParsedProperty', parsedPropertySchema, 'weekend_parsed_properties');

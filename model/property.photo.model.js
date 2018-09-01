@@ -25,4 +25,4 @@ var propertyPhotoSchema = new PropertyPhotoSchema({
     }
 });
 
-module.exports = mongoose.model('PropertyPhoto', propertyPhotoSchema, 'monday_property_photos');
+module.exports = mongoose.model('PropertyPhoto', propertyPhotoSchema, 'weekend_property_photos');

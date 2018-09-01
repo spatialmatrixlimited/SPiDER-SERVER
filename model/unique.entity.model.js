@@ -3,6 +3,7 @@ var UniqueEntitySchema = mongoose.Schema;
 
 var uniqueEntitySchema = new UniqueEntitySchema({
 	property_id: String,
+	building_serial_number: String,
 	entity: {
 		boys_quarter: Number,
 		meter_number: String,
@@ -56,4 +57,4 @@ var uniqueEntitySchema = new UniqueEntitySchema({
 });
 
 
-module.exports = mongoose.model('UniqueEntity', uniqueEntitySchema, 'monday_unique_entities');
+module.exports = mongoose.model('UniqueEntity', uniqueEntitySchema, 'weekend_unique_entities');

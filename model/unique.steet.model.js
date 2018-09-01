@@ -46,4 +46,4 @@ var uniqueStreetSchema = new UniqueStreetSchema(
     }
 );
 
-module.exports = mongoose.model('UniqueStreet', uniqueStreetSchema, 'monday_unique_streets');
+module.exports = mongoose.model('UniqueStreet', uniqueStreetSchema, 'weekend_unique_streets');

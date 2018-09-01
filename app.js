@@ -71,7 +71,7 @@ mongoose.connection.on('open',  ()=>{
 
 
     //Street Parser Job
-    /* parserJob.processStreet().then(value=>{
+    parserJob.processStreet().then(value=>{
         parserJob.processDuplicateStreet().then(value=>{
             parserJob.processStreetPhotos();
         }).catch(err=>{
@@ -80,10 +80,10 @@ mongoose.connection.on('open',  ()=>{
     }).catch(err=>{
         console.error(err);
     });
- */
+
 
     //Property Parser Job
-    /* parserJob.processProperty().then(value=>{
+    parserJob.processProperty().then(value=>{
         console.log('DONE');
         parserJob.processDuplicateProperty().then(value=>{
             parserJob.processPropertyPhotos();
@@ -92,12 +92,11 @@ mongoose.connection.on('open',  ()=>{
         });
     }).catch(err=>{
         console.error(err);
-    }); */
-    parserJob.processPropertyPhotos();
+    });
 
 
     //Entity Parser Job
-    /* parserJob.processEntity().then(value=>{
+    parserJob.processEntity().then(value=>{
         console.log('DONE: ' + value);
          parserJob.processDuplicateEntity().then(value=>{
             parserJob.processEntityPhotos();
@@ -106,7 +105,7 @@ mongoose.connection.on('open',  ()=>{
         }); 
     }).catch(err=>{
         console.error(err);
-    }); */
+    });
 
 
 });
