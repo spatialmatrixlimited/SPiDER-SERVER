@@ -181,7 +181,7 @@ let processStreet = () => {
         console.log('Parser Engine Started - Street');
         StreetRecord.find({
             'created': {
-                $gt: new Date('2018-08-20 18:56:14.291')
+                $gt: new Date('2018-09-02 18:56:14.291')
             }
         }, (err, docs) => {
             if (err) {
@@ -222,7 +222,7 @@ let processProperty = () => {
         console.log('Parser Engine Started - Property');
         PropertyRecord.find({
             'created': {
-                $gt: new Date('2018-08-20 18:56:14.291')
+                $gt: new Date('2018-09-02 18:56:14.291')
             }
         }, (err, docs) => {
             if (err) {
@@ -265,7 +265,7 @@ let processEntity = () => {
         console.log('Parser Engine Started - Entity');
         EntityRecord.find({
             'created': {
-                $gt: new Date('2018-08-20 18:56:14.291')
+                $gt: new Date('2018-09-02 18:56:14.291')
             }
         }, (err, docs) => {
             if (err) {
