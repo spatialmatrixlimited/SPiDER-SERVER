@@ -57,4 +57,4 @@ var uniqueEntitySchema = new UniqueEntitySchema({
 });
 
 
-module.exports = mongoose.model('UniqueEntity', uniqueEntitySchema, 'weekend_unique_entities');
+module.exports = mongoose.model('UniqueEntity', uniqueEntitySchema, 'friday_unique_entities');

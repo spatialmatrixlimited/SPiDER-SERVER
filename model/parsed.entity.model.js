@@ -56,4 +56,4 @@ var parsedEntitySchema = new ParsedEntitySchema({
 });
 
 
-module.exports = mongoose.model('ParsedEntity', parsedEntitySchema, 'weekend_parsed_entities');
+module.exports = mongoose.model('ParsedEntity', parsedEntitySchema, 'friday_parsed_entities');
