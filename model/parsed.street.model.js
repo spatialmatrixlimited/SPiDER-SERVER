@@ -46,4 +46,4 @@ var parsedStreetSchema = new ParsedStreetSchema(
     }
 );
 
-module.exports = mongoose.model('ParsedStreet', parsedStreetSchema, 'friday_parsed_streets');
+module.exports = mongoose.model('ParsedStreet', parsedStreetSchema, 'sat_parsed_streets');
