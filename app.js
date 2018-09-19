@@ -69,9 +69,16 @@ app.listen(port, function () {
 mongoose.connection.on('open',  ()=>{
     console.log('SPiDER Database is connected');
 
+    //User Parser Job
+
+    parserJob.processUser().then(value=>{
+        console.log(value)
+    }).catch(err=>{
+        console.error(err);
+    })
 
     //Street Parser Job
-    parserJob.processStreet().then(value=>{
+   /*  parserJob.processStreet().then(value=>{
         parserJob.processDuplicateStreet().then(value=>{
             parserJob.processStreetPhotos();
         }).catch(err=>{
@@ -105,7 +112,7 @@ mongoose.connection.on('open',  ()=>{
         }); 
     }).catch(err=>{
         console.error(err);
-    });
+    }); */
 
 
 });

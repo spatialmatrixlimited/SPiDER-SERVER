@@ -2,6 +2,8 @@
 let StreetRecord = require('../model/street.model');
 let PropertyRecord = require('../model/property.model');
 let EntityRecord = require('../model/entity.model');
+let User = require('../model/user.model');
+let ParsedUser = require('../model/parsed.user.model');
 
 let ParsedStreet = require('../model/parsed.street.model');
 let ParsedProperty = require('../model/parsed.property.model');
@@ -176,8 +178,65 @@ let parseRecords = (docs, docType) => {
     });
 }
 
+let parseUser = (docs) => {
+    return new Promise(resolve => {
+        let newRecord = {};
+        let newRecords = [];
+        let totalRecords = docs.length;
+        if (docType === 'street') {
+            console.log(`${totalRecords} users for processing...`);
+            docs.forEach(doc => {
+
+                newRecord = {
+                    id: doc._id,
+                    firstname: doc.personal.firstname,
+                    lastname: doc.personal.lastname,
+                    mobile: doc.personal.mobile,
+                    email: doc.persona.email,
+                    gender: doc.personal.gender,
+                    role: doc.security.role
+                }
+
+                newRecords.push(newRecord);
+
+            });
+
+            resolve(newRecords);
+        }
+
+    });
+}
+
+
+let processUser = () => {
+    return new Promise((resolve, reject) => {
+        console.log('Parser Engine Started - User');
+        User.find({}, (err, docs) => {
+            if (err) {
+                console.log('An error occured');
+                reject(err);
+            } else {
+                if (docs.length > 0) {
+                    console.log(`${docs.length} Users to Process`);
+                    parseUser(docs).then(parsedDocs=>{
+                        ParsedUser.insertMany(parsedDocs).then(result=>{
+                            resolve(result);
+                        }).catch(err=>{
+                            console.error(err);
+                            reject(err);
+                        });
+                    });
+                } else {
+                    resolve(false);
+                    console.log("No  user data to process");
+                }
+            }
+        });
+    });
+}
+
 let processStreet = () => {
-    return new Promise((resolve, reject)=>{
+    return new Promise((resolve, reject) => {
         console.log('Parser Engine Started - Street');
         StreetRecord.find({
             'created': {
@@ -207,18 +266,18 @@ let processStreet = () => {
                             console.log('Nothing to process here (Street)');
                         }
                     });
-    
+
                 } else {
                     resolve(false);
                     console.log("No  property data to process");
                 }
             }
         });
-    }); 
+    });
 }
 
 let processProperty = () => {
-    return new Promise((resolve, reject)=>{
+    return new Promise((resolve, reject) => {
         console.log('Parser Engine Started - Property');
         PropertyRecord.find({
             'created': {
@@ -248,7 +307,7 @@ let processProperty = () => {
                             resolve(false);
                         }
                     });
-    
+
                 } else {
                     console.log("No street data to process");
                     resolve(false);
@@ -256,12 +315,12 @@ let processProperty = () => {
             }
         });
     });
-    
+
 }
 
 
 let processEntity = () => {
-    return new Promise((resolve, reject)=>{
+    return new Promise((resolve, reject) => {
         console.log('Parser Engine Started - Entity');
         EntityRecord.find({
             'created': {
@@ -291,7 +350,7 @@ let processEntity = () => {
                             resolve(false);
                         }
                     });
-    
+
                 } else {
                     console.log("No entity data to process");
                     resolve(false);
@@ -299,7 +358,7 @@ let processEntity = () => {
             }
         });
     });
-   
+
 }
 
 let processStreetPhotos = () => {
@@ -462,7 +521,7 @@ let processEntityPhotos = () => {
 }
 
 let processDuplicateStreet = () => {
-    return new Promise((resolve, reject)=>{
+    return new Promise((resolve, reject) => {
         ParsedStreet.find({}, (err, docs) => {
             if (err) {
                 console.log('No record to process');
@@ -475,31 +534,31 @@ let processDuplicateStreet = () => {
                     console.log(`${docs.length} records for processing and save...`);
                     fetchUniqueData(docs, 'street').then(uniqueData => {
                         UniqueStreet.insertMany(uniqueData, (err, returned) => {
-                            if (err){
+                            if (err) {
                                 console.error(err);
                                 reject(err);
-                            }else{
-                                if(returned){
+                            } else {
+                                if (returned) {
                                     console.log(`${returned.length} unique street records processed and saved!`);
-                                    resolve(true);  
-                                }else{
+                                    resolve(true);
+                                } else {
                                     console.log(`No data street returned`);
-                                    resolve(false);  
+                                    resolve(false);
                                 }
-                                 
+
                             }
-    
+
                         });
                     });
                 }
             }
         });
     });
-    
+
 }
 
 let processDuplicateProperty = () => {
-    return new Promise((resolve, reject)=>{
+    return new Promise((resolve, reject) => {
         ParsedProperty.find({}, (err, docs) => {
             if (err) {
                 console.log('No record to process');
@@ -513,32 +572,32 @@ let processDuplicateProperty = () => {
                     console.log(`${docs.length} records for processing and save...`);
                     fetchUniqueData(docs, 'property').then(uniqueData => {
                         UniqueProperty.insertMany(uniqueData, (err, returned) => {
-                            if (err){
+                            if (err) {
                                 console.error(err);
                                 reject(err);
-                            }else{
-                                if(returned){
+                            } else {
+                                if (returned) {
                                     console.log(`${returned.length} unique property records processed and saved!`);
-                                    resolve(true);  
-                                }else{
+                                    resolve(true);
+                                } else {
                                     console.log(`No data property returned`);
-                                    resolve(false);  
+                                    resolve(false);
                                 }
-                                 
+
                             }
                         });
                     });
-    
+
                 }
             }
         });
     });
-    
+
 }
 
 
 let processDuplicateEntity = () => {
-    return new Promise((resolve, reject)=>{
+    return new Promise((resolve, reject) => {
         ParsedEntity.find({}, (err, docs) => {
             if (err) {
                 console.log('No record to process');
@@ -552,18 +611,18 @@ let processDuplicateEntity = () => {
                     console.log(`${docs.length} records for processing and save...`);
                     fetchUniqueData(docs, 'entity').then(uniqueData => {
                         UniqueEntity.insertMany(uniqueData, (err, returned) => {
-                            if (err){
+                            if (err) {
                                 console.error(err);
                                 reject(err);
-                            }else{
-                                if(returned){
+                            } else {
+                                if (returned) {
                                     console.log(`${returned.length} unique entity records processed and saved!`);
-                                    resolve(true);  
-                                }else{
+                                    resolve(true);
+                                } else {
                                     console.log(`No data Entity returned`);
-                                    resolve(false);  
+                                    resolve(false);
                                 }
-                                 
+
                             }
                         });
                     });
@@ -571,12 +630,13 @@ let processDuplicateEntity = () => {
             }
         });
     });
-   
+
 }
 
 exports.processStreet = processStreet;
 exports.processProperty = processProperty;
 exports.processEntity = processEntity;
+exports.processUser = processUser;
 
 exports.processDuplicateStreet = processDuplicateStreet;
 exports.processDuplicateProperty = processDuplicateProperty;
