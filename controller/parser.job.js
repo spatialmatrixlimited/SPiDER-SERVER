@@ -183,26 +183,24 @@ let parseUser = (docs) => {
         let newRecord = {};
         let newRecords = [];
         let totalRecords = docs.length;
-        if (docType === 'street') {
-            console.log(`${totalRecords} users for processing...`);
-            docs.forEach(doc => {
+        console.log(`${totalRecords} users for processing...`);
+        docs.forEach(doc => {
 
-                newRecord = {
-                    id: doc._id,
-                    firstname: doc.personal.firstname,
-                    lastname: doc.personal.lastname,
-                    mobile: doc.personal.mobile,
-                    email: doc.persona.email,
-                    gender: doc.personal.gender,
-                    role: doc.security.role
-                }
+            newRecord = {
+                id: doc._id,
+                firstname: doc.personal.firstname,
+                lastname: doc.personal.lastname,
+                mobile: doc.personal.mobile,
+                email: doc.persona.email,
+                gender: doc.personal.gender,
+                role: doc.security.role
+            }
 
-                newRecords.push(newRecord);
+            newRecords.push(newRecord);
 
-            });
+        });
 
-            resolve(newRecords);
-        }
+        resolve(newRecords);
 
     });
 }
@@ -218,10 +216,10 @@ let processUser = () => {
             } else {
                 if (docs.length > 0) {
                     console.log(`${docs.length} Users to Process`);
-                    parseUser(docs).then(parsedDocs=>{
-                        ParsedUser.insertMany(parsedDocs).then(result=>{
+                    parseUser(docs).then(parsedDocs => {
+                        ParsedUser.insertMany(parsedDocs).then(result => {
                             resolve(result);
-                        }).catch(err=>{
+                        }).catch(err => {
                             console.error(err);
                             reject(err);
                         });
