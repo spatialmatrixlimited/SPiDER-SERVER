@@ -191,7 +191,7 @@ let parseUser = (docs) => {
                 firstname: doc.personal.firstname,
                 lastname: doc.personal.lastname,
                 mobile: doc.personal.mobile,
-                email: doc.persona.email,
+                email: doc.personal.email,
                 gender: doc.personal.gender,
                 role: doc.security.role
             }
