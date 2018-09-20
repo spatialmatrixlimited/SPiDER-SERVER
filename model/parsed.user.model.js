@@ -1,7 +1,12 @@
 var mongoose = require('mongoose');
 var ParsedUserSchema = mongoose.Schema;
+var ObjectId = mongoose.Schema.Types.ObjectId;
 var parsedUserSchema = new ParsedUserSchema({
 
+    id: {
+        type: ObjectId,
+        ref: 'User'
+    },
     firstname: {
         type: String,
         default: ''
@@ -26,4 +31,4 @@ var parsedUserSchema = new ParsedUserSchema({
     role: String
 });
 
-module.exports = mongoose.model('ParsedUser', parsedUserSchema, 'parsed_users');
+module.exports = mongoose.model('ParsedUser', parsedUserSchema, 'spider_users');

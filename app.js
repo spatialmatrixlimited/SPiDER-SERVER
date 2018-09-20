@@ -72,7 +72,7 @@ mongoose.connection.on('open',  ()=>{
     //User Parser Job
 
     parserJob.processUser().then(value=>{
-        console.log(value)
+        console.log(value.length + 'users saved successfully!');
     }).catch(err=>{
         console.error(err);
     })
