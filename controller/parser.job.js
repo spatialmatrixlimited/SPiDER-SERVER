@@ -225,8 +225,8 @@ let processUser = () => {
                         });
                     });
                 } else {
-                    resolve(false);
                     console.log("No  user data to process");
+                    resolve(docs);
                 }
             }
         });
