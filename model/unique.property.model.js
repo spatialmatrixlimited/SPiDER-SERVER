@@ -55,4 +55,4 @@ var uniquePropertySchema = new UniquePropertySchema({
 
 });
 
-module.exports = mongoose.model('UniqueProperty', uniquePropertySchema, 'sat_unique_properties');
+module.exports = mongoose.model('UniqueProperty', uniquePropertySchema, 'spider_properties');

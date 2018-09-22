@@ -236,11 +236,7 @@ let processUser = () => {
 let processStreet = () => {
     return new Promise((resolve, reject) => {
         console.log('Parser Engine Started - Street');
-        StreetRecord.find({
-            'created': {
-                $gt: new Date('2018-09-07 18:56:14.291')
-            }
-        }, (err, docs) => {
+        StreetRecord.find({}, (err, docs) => {
             if (err) {
                 console.log('An error occured');
                 reject(err);
@@ -277,11 +273,7 @@ let processStreet = () => {
 let processProperty = () => {
     return new Promise((resolve, reject) => {
         console.log('Parser Engine Started - Property');
-        PropertyRecord.find({
-            'created': {
-                $gt: new Date('2018-09-07 18:56:14.291')
-            }
-        }, (err, docs) => {
+        PropertyRecord.find({}, (err, docs) => {
             if (err) {
                 console.log('An error occured');
                 reject(err);
@@ -320,11 +312,7 @@ let processProperty = () => {
 let processEntity = () => {
     return new Promise((resolve, reject) => {
         console.log('Parser Engine Started - Entity');
-        EntityRecord.find({
-            'created': {
-                $gt: new Date('2018-09-07 18:56:14.291')
-            }
-        }, (err, docs) => {
+        EntityRecord.find({}, (err, docs) => {
             if (err) {
                 console.log('An error occured');
                 reject(err);

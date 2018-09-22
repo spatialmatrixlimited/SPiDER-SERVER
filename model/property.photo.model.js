@@ -25,4 +25,4 @@ var propertyPhotoSchema = new PropertyPhotoSchema({
     }
 });
 
-module.exports = mongoose.model('PropertyPhoto', propertyPhotoSchema, 'sat_property_photos');
+module.exports = mongoose.model('PropertyPhoto', propertyPhotoSchema, 'spider_property_photos');

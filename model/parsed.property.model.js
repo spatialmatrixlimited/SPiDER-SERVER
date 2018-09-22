@@ -55,4 +55,4 @@ var parsedPropertySchema = new ParsedPropertySchema({
 
 });
 
-module.exports = mongoose.model('ParsedProperty', parsedPropertySchema, 'sat_parsed_properties');
+module.exports = mongoose.model('ParsedProperty', parsedPropertySchema, 'spider_parsed_properties');

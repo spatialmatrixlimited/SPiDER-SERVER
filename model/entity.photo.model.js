@@ -21,4 +21,4 @@ var entityPhotoSchema = new EntityPhotoSchema({
     }
 });
 
-module.exports = mongoose.model('EntityPhoto', entityPhotoSchema, 'sat_entity_photos');
+module.exports = mongoose.model('EntityPhoto', entityPhotoSchema, 'spider_entity_photos');
