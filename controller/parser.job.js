@@ -246,15 +246,25 @@ let processStreet = () => {
                     parseRecords(docs, 'street').then(returned => {
                         if (returned.length > 0) {
                             console.log(`${returned.length} street records for bulk processing...`);
-                            ParsedStreet.insertMany(returned, (err, savedDocs) => {
-                                if (err) {
-                                    console.error(err);
-                                    reject(err);
-                                } else {
-                                    console.log(`${savedDocs.length} street records saved!`);
-                                    resolve(true);
-                                }
-                            })
+                            console.log(`${returned.length} records for processing and save...`);
+                            fetchUniqueData(returned, 'street').then(uniqueData => {
+                                UniqueStreet.insertMany(uniqueData, (err, uniques) => {
+                                    if (err) {
+                                        console.error(err);
+                                        reject(err);
+                                    } else {
+                                        if (uniques) {
+                                            console.log(`${uniques.length} unique street records processed and saved!`);
+                                            resolve(true);
+                                        } else {
+                                            console.log(`No data street returned`);
+                                            resolve(false);
+                                        }
+
+                                    }
+
+                                });
+                            });
                         } else {
                             resolve(false);
                             console.log('Nothing to process here (Street)');
@@ -280,22 +290,23 @@ let processProperty = () => {
             } else {
                 if (docs.length > 0) {
                     console.log(`${docs.length} PROPERTY Records to Process`);
-                    parseRecords(docs, 'property').then(returned => {
-                        if (returned.length > 0) {
-                            console.log(`${returned.length} property records for bulk processing...`);
-                            ParsedProperty.insertMany(returned, (err, savedDocs) => {
-                                if (err) {
-                                    console.error(err);
-                                    reject(err);
-                                } else {
-                                    console.log(`${savedDocs.length} property records saved!`);
+                    console.log(`${docs.length} records for processing and save...`);
+                    fetchUniqueData(docs, 'property').then(uniqueData => {
+                        UniqueProperty.insertMany(uniqueData, (err, returned) => {
+                            if (err) {
+                                console.error(err);
+                                reject(err);
+                            } else {
+                                if (returned) {
+                                    console.log(`${returned.length} unique property records processed and saved!`);
                                     resolve(true);
+                                } else {
+                                    console.log(`No data property returned`);
+                                    resolve(false);
                                 }
-                            })
-                        } else {
-                            console.log('Nothing to process here (Property)');
-                            resolve(false);
-                        }
+
+                            }
+                        });
                     });
 
                 } else {
@@ -322,15 +333,24 @@ let processEntity = () => {
                     parseRecords(docs, 'entity').then(returned => {
                         if (returned.length > 0) {
                             console.log(`${returned.length} entity records for bulk processing...`);
-                            ParsedEntity.insertMany(returned, (err, savedDocs) => {
-                                if (err) {
-                                    console.error(err);
-                                    reject(err);
-                                } else {
-                                    console.log(`${savedDocs.length} entity records saved!`);
-                                    resolve(true);
-                                }
-                            })
+                            console.log(`${docs.length} records for processing and save...`);
+                            fetchUniqueData(docs, 'entity').then(uniqueData => {
+                                UniqueEntity.insertMany(uniqueData, (err, returned) => {
+                                    if (err) {
+                                        console.error(err);
+                                        reject(err);
+                                    } else {
+                                        if (returned) {
+                                            console.log(`${returned.length} unique entity records processed and saved!`);
+                                            resolve(true);
+                                        } else {
+                                            console.log(`No data Entity returned`);
+                                            resolve(false);
+                                        }
+
+                                    }
+                                });
+                            });
                         } else {
                             console.log('Nothing to process here (Entity)');
                             resolve(false);
@@ -361,7 +381,6 @@ let processStreetPhotos = () => {
                 let count = 0;
                 doc.forEach(_doc => {
                     count += 1;
-                    console.log(`Start with RECORD ${count} with ID: ${_doc._id}`);
                     photos = [];
                     _doc.street_photos.forEach(photo => photos.push({
                         url: photo.url,
@@ -413,7 +432,6 @@ let processPropertyPhotos = () => {
                 let count = 0;
                 doc.forEach(_doc => {
                     count += 1;
-                    console.log(`Start with RECORD ${count} with ID: ${_doc._id}`);
                     photos = [];
                     _doc.property_photos.forEach(photo => photos.push({
                         url: photo.url,
@@ -467,7 +485,6 @@ let processEntityPhotos = () => {
                 let count = 0;
                 doc.forEach(_doc => {
                     count += 1;
-                    console.log(`Start with RECORD ${count} with ID: ${_doc._id}`);
                     photos = [];
                     _doc.property_photos.forEach(photo => photos.push({
                         url: photo.url,

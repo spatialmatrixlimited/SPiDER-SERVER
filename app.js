@@ -79,11 +79,7 @@ mongoose.connection.on('open',  ()=>{
 
     //Street Parser Job
      parserJob.processStreet().then(value=>{
-        parserJob.processDuplicateStreet().then(value=>{
-            parserJob.processStreetPhotos();
-        }).catch(err=>{
-            console.error(err);
-        });
+        parserJob.processStreetPhotos();
     }).catch(err=>{
         console.error(err);
     });
@@ -92,11 +88,7 @@ mongoose.connection.on('open',  ()=>{
     //Property Parser Job
     /* parserJob.processProperty().then(value=>{
         console.log('DONE');
-        parserJob.processDuplicateProperty().then(value=>{
-            parserJob.processPropertyPhotos();
-        }).catch(err=>{
-            console.error(err);
-        });
+        parserJob.processPropertyPhotos();
     }).catch(err=>{
         console.error(err);
     }); */
@@ -105,11 +97,7 @@ mongoose.connection.on('open',  ()=>{
     //Entity Parser Job
     /* parserJob.processEntity().then(value=>{
         console.log('DONE: ' + value);
-         parserJob.processDuplicateEntity().then(value=>{
-            parserJob.processEntityPhotos();
-        }).catch(err=>{
-            console.error(err);
-        }); 
+        parserJob.processEntityPhotos(); 
     }).catch(err=>{
         console.error(err);
     });  */
