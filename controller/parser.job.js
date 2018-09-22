@@ -448,7 +448,6 @@ let processPropertyPhotos = () => {
                     }
 
                     newRecords.push(newRecord);
-                    console.log(`Done with RECORD ${count} with ID: ${_doc._id}`);
 
                 });
 

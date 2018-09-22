@@ -86,21 +86,21 @@ mongoose.connection.on('open',  ()=>{
 
 
     //Property Parser Job
-    parserJob.processProperty().then(value=>{
+    p/* arserJob.processProperty().then(value=>{
         console.log('DONE');
         parserJob.processPropertyPhotos();
     }).catch(err=>{
         console.error(err);
-    });
+    }); */
 
 
     //Entity Parser Job
-    /* parserJob.processEntity().then(value=>{
+    parserJob.processEntity().then(value=>{
         console.log('DONE: ' + value);
         parserJob.processEntityPhotos(); 
     }).catch(err=>{
         console.error(err);
-    });  */
+    }); 
 
 
 });
