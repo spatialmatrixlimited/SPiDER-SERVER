@@ -396,7 +396,6 @@ let processStreetPhotos = () => {
                     }
 
                     newRecords.push(newRecord);
-                    console.log(`Done with RECORD ${count} with ID: ${_doc._id}`);
 
                 });
 
@@ -501,7 +500,6 @@ let processEntityPhotos = () => {
                     }
 
                     newRecords.push(newRecord);
-                    console.log(`Done with RECORD ${count} with ID: ${_doc._id}`);
 
                 });
 
