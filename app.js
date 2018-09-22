@@ -86,7 +86,7 @@ mongoose.connection.on('open',  ()=>{
 
 
     //Property Parser Job
-    p/* arserJob.processProperty().then(value=>{
+    /* parserJob.processProperty().then(value=>{
         console.log('DONE');
         parserJob.processPropertyPhotos();
     }).catch(err=>{
