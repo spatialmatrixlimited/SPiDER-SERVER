@@ -9,7 +9,7 @@ let ParsedStreet = require('../model/parsed.street.model');
 let ParsedProperty = require('../model/parsed.property.model');
 let ParsedEntity = require('../model/parsed.entity.model');
 
-let UniqueStreet = require('../model/unique.steet.model');
+let UniqueStreet = require('../model/unique.street.model');
 let UniqueProperty = require('../model/unique.property.model');
 let UniqueEntity = require('../model/unique.entity.model');
 
