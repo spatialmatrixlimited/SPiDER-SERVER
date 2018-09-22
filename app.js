@@ -78,20 +78,20 @@ mongoose.connection.on('open',  ()=>{
     }); */
 
     //Street Parser Job
-     parserJob.processStreet().then(value=>{
+    /*  parserJob.processStreet().then(value=>{
         parserJob.processStreetPhotos();
     }).catch(err=>{
         console.error(err);
-    });
+    }); */
 
 
     //Property Parser Job
-    /* parserJob.processProperty().then(value=>{
+    parserJob.processProperty().then(value=>{
         console.log('DONE');
         parserJob.processPropertyPhotos();
     }).catch(err=>{
         console.error(err);
-    }); */
+    });
 
 
     //Entity Parser Job
