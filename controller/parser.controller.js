@@ -27,7 +27,7 @@ var parserController = {
             } else {
                 console.log(`July: Streets Captured is ${docs.length}`);
                 JulyStreet.insertMany(docs).then(result => {
-                    console.log(result);
+                    console.log(`Saved ${result.length} new records`);
                 });
             }
         });
@@ -46,7 +46,7 @@ var parserController = {
             } else {
                 console.log(`July: Properties Captured is ${docs.length}`);
                 JulyProperty.insertMany(docs).then(result => {
-                    console.log(result);
+                    console.log(`Saved ${result.length} new records`);
                 });
             }
         });
@@ -65,7 +65,7 @@ var parserController = {
             } else {
                 console.log(`July: Entities Captured is ${docs.length}`);
                 JulyEntity.insertMany(docs).then(result => {
-                    console.log(result);
+                    console.log(`Saved ${result.length} new records`);
                 });
             }
         });
@@ -85,7 +85,7 @@ var parserController = {
             } else {
                 console.log(`August: Streets Captured is ${docs.length}`);
                 AugustStreet.insertMany(docs).then(result => {
-                    console.log(result);
+                    console.log(`Saved ${result.length} new records`);
                 });
             }
         });
@@ -104,7 +104,7 @@ var parserController = {
             } else {
                 console.log(`August: Properties Captured is ${docs.length}`);
                 AugustProperty.insertMany(docs).then(result => {
-                    console.log(result);
+                    console.log(`Saved ${result.length} new records`);
                 });
             }
         });
@@ -123,7 +123,7 @@ var parserController = {
                 console.log('-----------------------------------------------');
                 console.log(`August: Entities Captured is ${docs.length}`);
                 AugustEntity.insertMany(docs).then(result => {
-                    console.log(result);
+                    console.log(`Saved ${result.length} new records`);
                 });
             }
         });
@@ -141,7 +141,7 @@ var parserController = {
             } else {
                 console.log(`September: Streets Captured is ${docs.length}`);
                 SeptemberStreet.insertMany(docs).then(result => {
-                    console.log(result);
+                    console.log(`Saved ${result.length} new records`);
                 });
             }
         });
@@ -159,7 +159,7 @@ var parserController = {
             } else {
                 console.log(`September: Properties Captured is ${docs.length}`);
                 SeptemberProperty.insertMany(docs).then(result => {
-                    console.log(result);
+                    console.log(`Saved ${result.length} new records`);
                 });
             }
         });
@@ -177,7 +177,7 @@ var parserController = {
             } else {
                 console.log(`September: Entities Captured is ${docs.length}`);
                 SeptemberEntity.insertMany(docs).then(result => {
-                    console.log(result);
+                    console.log(`Saved ${result.length} new records`);
                 });
             }
         });
