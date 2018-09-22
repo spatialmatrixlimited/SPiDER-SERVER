@@ -18,8 +18,8 @@ var parserController = {
     july: () => {
         Street.find({
             created: {
-                $gte: ISODate("2018-07-07T00:00:00.000Z"),
-                $lt: ISODate("2018-07-31T00:00:00.000Z")
+                $gte: new Date("2018-07-07T00:00:00.000Z"),
+                $lt: new Date("2018-07-31T00:00:00.000Z")
             }
         }, (err, docs) => {
             if (err) {
@@ -36,8 +36,8 @@ var parserController = {
 
         Property.find({
             created: {
-                $gte: ISODate("2018-07-07T00:00:00.000Z"),
-                $lt: ISODate("2018-07-31T00:00:00.000Z")
+                $gte: new Date("2018-07-07T00:00:00.000Z"),
+                $lt: new Date("2018-07-31T00:00:00.000Z")
             }
         }, (err, docs) => {
             console.log('-----------------------------------------------');
@@ -55,8 +55,8 @@ var parserController = {
 
         Entity.find({
             created: {
-                $gte: ISODate("2018-07-07T00:00:00.000Z"),
-                $lt: ISODate("2018-07-31T00:00:00.000Z")
+                $gte: new Date("2018-07-07T00:00:00.000Z"),
+                $lt: new Date("2018-07-31T00:00:00.000Z")
             }
         }, (err, docs) => {
             console.log('-----------------------------------------------');
@@ -76,8 +76,8 @@ var parserController = {
     august: () => {
         Street.find({
             created: {
-                $gte: ISODate("2018-08-01T00:00:00.000Z"),
-                $lt: ISODate("2018-08-31T00:00:00.000Z")
+                $gte: new Date("2018-08-01T00:00:00.000Z"),
+                $lt: new Date("2018-08-31T00:00:00.000Z")
             }
         }, (err, docs) => {
             if (err) {
@@ -94,8 +94,8 @@ var parserController = {
 
         Property.find({
             created: {
-                $gte: ISODate("2018-08-01T00:00:00.000Z"),
-                $lt: ISODate("2018-08-31T00:00:00.000Z")
+                $gte: new Date("2018-08-01T00:00:00.000Z"),
+                $lt: new Date("2018-08-31T00:00:00.000Z")
             }
         }, (err, docs) => {
             console.log('-----------------------------------------------');
@@ -113,8 +113,8 @@ var parserController = {
 
         Entity.find({
             created: {
-                $gte: ISODate("2018-08-01T00:00:00.000Z"),
-                $lt: ISODate("2018-08-31T00:00:00.000Z")
+                $gte: new Date("2018-08-01T00:00:00.000Z"),
+                $lt: new Date("2018-08-31T00:00:00.000Z")
             }
         }, (err, docs) => {
             if (err) {
@@ -132,8 +132,8 @@ var parserController = {
     september: () => {
         Street.find({
             created: {
-                $gte: ISODate("2018-09-01T00:00:00.000Z"),
-                $lt: ISODate("2018-09-30T00:00:00.000Z")
+                $gte: new Date("2018-09-01T00:00:00.000Z"),
+                $lt: new Date("2018-09-30T00:00:00.000Z")
             }
         }, (err, docs) => {
             if (err) {
@@ -149,8 +149,8 @@ var parserController = {
 
         Property.find({
             created: {
-                $gte: ISODate("2018-09-01T00:00:00.000Z"),
-                $lt: ISODate("2018-09-30T00:00:00.000Z")
+                $gte: new Date("2018-09-01T00:00:00.000Z"),
+                $lt: new Date("2018-09-30T00:00:00.000Z")
             }
         }, (err, docs) => {
             console.log('-----------------------------------------------');
@@ -167,8 +167,8 @@ var parserController = {
 
         Entity.find({
             created: {
-                $gte: ISODate("2018-09-01T00:00:00.000Z"),
-                $lt: ISODate("2018-09-30T00:00:00.000Z")
+                $gte: new Date("2018-09-01T00:00:00.000Z"),
+                $lt: new Date("2018-09-30T00:00:00.000Z")
             }
         }, (err, docs) => {
             console.log('-----------------------------------------------');
