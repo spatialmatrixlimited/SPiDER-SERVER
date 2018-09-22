@@ -9,6 +9,8 @@ var mongoose = require('mongoose');
 var cors = require('cors');
 var morgan = require('morgan');
 var parserJob = require('./controller/parser.job');
+var pc = require('./controller/parser.controller');
+
 var port = process.env.PORT || 6111;
 
 mongoose.Promise = global.Promise;
@@ -66,16 +68,28 @@ app.listen(port, function () {
 });
 
 
-mongoose.connection.on('open',  ()=>{
+mongoose.connection.on('open', () => {
     console.log('SPiDER Database is connected');
+
+    pc.july();
+
+    setTimeout(() => {
+        pc.august();
+        setTimeout(() => {
+            pc.september();
+        }, 15000);
+    }, 15000);
+
+
+
 
     //User Parser Job
 
-   /*  parserJob.processUser().then(value=>{
-        console.log(value.length + ' users saved successfully!');
-    }).catch(err=>{
-        console.error(err);
-    }); */
+    /*  parserJob.processUser().then(value=>{
+         console.log(value.length + ' users saved successfully!');
+     }).catch(err=>{
+         console.error(err);
+     }); */
 
     //Street Parser Job
     /*  parserJob.processStreet().then(value=>{
@@ -95,12 +109,12 @@ mongoose.connection.on('open',  ()=>{
 
 
     //Entity Parser Job
-    parserJob.processEntity().then(value=>{
+    /* parserJob.processEntity().then(value=>{
         console.log('DONE: ' + value);
         parserJob.processEntityPhotos(); 
     }).catch(err=>{
         console.error(err);
-    }); 
+    }); */
 
 
 });
