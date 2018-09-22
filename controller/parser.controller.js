@@ -16,7 +16,7 @@ var SeptemberEntity = require('../model/september.entity.model');
 
 var parserController = {
     july: () => {
-        Street.find({
+        /*     Street.find({
             created: {
                 $gte: new Date("2018-07-07T00:00:00.000Z"),
                 $lt: new Date("2018-07-31T00:00:00.000Z")
@@ -31,8 +31,8 @@ var parserController = {
                 });
             }
         });
+ */
 
-       
 
         Property.find({
             created: {
@@ -51,24 +51,24 @@ var parserController = {
             }
         });
 
-        
 
-        Entity.find({
-            created: {
-                $gte: new Date("2018-07-07T00:00:00.000Z"),
-                $lt: new Date("2018-07-31T00:00:00.000Z")
-            }
-        }, (err, docs) => {
-            console.log('-----------------------------------------------');
-            if (err) {
-                console.error(err);
-            } else {
-                console.log(`July: Entities Captured is ${docs.length}`);
-                JulyEntity.insertMany(docs).then(() => {
-                    console.log(`Saved ${docs.length} entity records`);
-                });
-            }
-        });
+
+        /*  Entity.find({
+             created: {
+                 $gte: new Date("2018-07-07T00:00:00.000Z"),
+                 $lt: new Date("2018-07-31T00:00:00.000Z")
+             }
+         }, (err, docs) => {
+             console.log('-----------------------------------------------');
+             if (err) {
+                 console.error(err);
+             } else {
+                 console.log(`July: Entities Captured is ${docs.length}`);
+                 JulyEntity.insertMany(docs).then(() => {
+                     console.log(`Saved ${docs.length} entity records`);
+                 });
+             }
+         }); */
 
 
     },
@@ -84,7 +84,7 @@ var parserController = {
                 console.error(err);
             } else {
                 console.log(`August: Streets Captured is ${docs.length}`);
-                AugustStreet.insertMany(docs).then(()=> {
+                AugustStreet.insertMany(docs).then(() => {
                     console.log(`Saved ${docs.length} street records`);
                 });
             }
@@ -162,7 +162,7 @@ var parserController = {
                     console.log(`Saved ${docs.length} property records`);
                 });
             }
-        }); 
+        });
 
 
         Entity.find({

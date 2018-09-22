@@ -72,8 +72,6 @@ mongoose.connection.on('open', () => {
     console.log('SPiDER Database is connected');
 
     pc.july();
-    pc.august();
-    pc.september();
 
 
 
