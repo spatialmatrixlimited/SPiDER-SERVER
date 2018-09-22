@@ -32,7 +32,7 @@ var parserController = {
             }
         });
 
-        console.log('-----------------------------------------------');
+       
 
         Property.find({
             created: {
@@ -40,6 +40,7 @@ var parserController = {
                 $lt: ISODate("2018-07-31T00:00:00.000Z")
             }
         }, (err, docs) => {
+            console.log('-----------------------------------------------');
             if (err) {
                 console.error(err);
             } else {
@@ -50,7 +51,7 @@ var parserController = {
             }
         });
 
-        console.log('-----------------------------------------------');
+        
 
         Entity.find({
             created: {
@@ -58,6 +59,7 @@ var parserController = {
                 $lt: ISODate("2018-07-31T00:00:00.000Z")
             }
         }, (err, docs) => {
+            console.log('-----------------------------------------------');
             if (err) {
                 console.error(err);
             } else {
@@ -88,7 +90,6 @@ var parserController = {
             }
         });
 
-        console.log('-----------------------------------------------');
 
 
         Property.find({
@@ -97,6 +98,7 @@ var parserController = {
                 $lt: ISODate("2018-08-31T00:00:00.000Z")
             }
         }, (err, docs) => {
+            console.log('-----------------------------------------------');
             if (err) {
                 console.error(err);
             } else {
@@ -107,7 +109,6 @@ var parserController = {
             }
         });
 
-        console.log('-----------------------------------------------');
 
 
         Entity.find({
@@ -119,6 +120,7 @@ var parserController = {
             if (err) {
                 console.error(err);
             } else {
+                console.log('-----------------------------------------------');
                 console.log(`August: Entities Captured is ${docs.length}`);
                 AugustEntity.insertMany(docs).then(result => {
                     console.log(result);
@@ -144,7 +146,6 @@ var parserController = {
             }
         });
 
-        console.log('-----------------------------------------------');
 
         Property.find({
             created: {
@@ -152,6 +153,7 @@ var parserController = {
                 $lt: ISODate("2018-09-30T00:00:00.000Z")
             }
         }, (err, docs) => {
+            console.log('-----------------------------------------------');
             if (err) {
                 console.error(err);
             } else {
@@ -163,14 +165,13 @@ var parserController = {
         });
 
 
-        console.log('-----------------------------------------------');
-
         Entity.find({
             created: {
                 $gte: ISODate("2018-09-01T00:00:00.000Z"),
                 $lt: ISODate("2018-09-30T00:00:00.000Z")
             }
         }, (err, docs) => {
+            console.log('-----------------------------------------------');
             if (err) {
                 console.error(err);
             } else {
