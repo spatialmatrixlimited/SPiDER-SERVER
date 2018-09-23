@@ -93,12 +93,12 @@ mongoose.connection.on('open', () => {
 
 
     //Property Parser Job
-    /* parserJob.processProperty().then(value=>{
+    parserJob.processProperty().then(value=>{
         console.log('DONE');
-        parserJob.processPropertyPhotos();
+        //parserJob.processPropertyPhotos();
     }).catch(err=>{
         console.error(err);
-    }); */
+    });
 
 
     //Entity Parser Job
