@@ -111,23 +111,22 @@ let parseRecords = (docs, docType) => {
                 }));
 
                 newRecord = {
-                    'property': doc.property,
-                    'property_photos': photos,
-                    'created': doc.created,
-                    'entities': doc.entities,
-                    'location': {
-                        'type': doc.location.type,
-                        'coordinates': {
-                            'longitude': doc.location.coordinates[0],
-                            'latitude': doc.location.coordinates[1]
+                    property: doc.property,
+                    property_photos: photos,
+                    created: doc.created,
+                    entities: doc.entities,
+                    location: {
+                        coordinates: {
+                            longitude: doc.location.coordinates[0],
+                            latitude: doc.location.coordinates[1]
                         },
-                        'whatthreewords': doc.location.whatthreewords
+                        whatthreewords: doc.location.whatthreewords
                     },
-                    'enumerator': doc.enumerator,
-                    'contact': doc.contact,
-                    'document_status': doc.document_status
+                    enumerator: doc.enumerator,
+                    contact: doc.contact,
+                    document_status: doc.document_status
                 }
-
+                console.log(newRecord.location.coordinates);
                 newRecords.push(newRecord);
 
             });
