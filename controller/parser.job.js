@@ -100,6 +100,7 @@ let parseRecords = (docs, docType) => {
         }
 
         if (docType === 'property') {
+            let index = 0;
             console.log(`${totalRecords} ${docType} records for processing...`);
             docs.forEach(doc => {
 
@@ -126,7 +127,8 @@ let parseRecords = (docs, docType) => {
                     contact: doc.contact,
                     document_status: doc.document_status
                 }
-                console.log(doc.location.coordinates);
+                index += 1;
+                console.log(`Processed document ${index} of ${docs.length}`)
                 newRecords.push(newRecord);
 
             });
@@ -290,23 +292,35 @@ let processProperty = () => {
                 if (docs.length > 0) {
                     console.log(`${docs.length} PROPERTY Records to Process`);
                     console.log(`${docs.length} records for processing and save...`);
-                    fetchUniqueData(docs, 'property').then(uniqueData => {
-                        UniqueProperty.insertMany(uniqueData, (err, returned) => {
-                            if (err) {
-                                console.error(err);
-                                reject(err);
-                            } else {
-                                if (returned) {
-                                    console.log(`${returned.length} unique property records processed and saved!`);
-                                    resolve(true);
-                                } else {
-                                    console.log(`No data property returned`);
-                                    resolve(false);
-                                }
+                    parseRecords(docs, 'property').then(returned => {
+                        if (returned.length > 0) {
+                            console.log(`${returned.length} street records for bulk processing...`);
+                            console.log(`${returned.length} records for processing and save...`);
+                            
+                            fetchUniqueData(docs, 'property').then(uniqueData => {
+                                UniqueProperty.insertMany(uniqueData, (err, returned) => {
+                                    if (err) {
+                                        console.error(err);
+                                        reject(err);
+                                    } else {
+                                        if (returned) {
+                                            console.log(`${returned.length} unique property records processed and saved!`);
+                                            resolve(true);
+                                        } else {
+                                            console.log(`No data property returned`);
+                                            resolve(false);
+                                        }
+        
+                                    }
+                                });
+                            });
 
-                            }
-                        });
+                        } else {
+                            resolve(false);
+                            console.log('Nothing to process here (Street)');
+                        }
                     });
+                  
 
                 } else {
                     console.log("No street data to process");
