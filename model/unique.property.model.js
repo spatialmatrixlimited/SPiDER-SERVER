@@ -28,7 +28,6 @@ var uniquePropertySchema = new UniquePropertySchema({
 	},
 	created: Date,
 	location: {
-		type: {type: String},
 		coordinates: {
 			latitude: Number,
 			longitude: Number
