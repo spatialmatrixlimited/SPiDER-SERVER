@@ -126,7 +126,7 @@ let parseRecords = (docs, docType) => {
                     contact: doc.contact,
                     document_status: doc.document_status
                 }
-                console.log(newRecord.location.coordinates);
+                console.log(doc.location.coordinates);
                 newRecords.push(newRecord);
 
             });
