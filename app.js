@@ -23,7 +23,7 @@ mongoose.connect(config.database, {
 });
 
 
-let chronos;
+//let chronos;
 
 var app = express();
 
@@ -116,7 +116,7 @@ mongoose.connection.on('open', () => {
 // If the connection throws an error
 mongoose.connection.on('error', (err) => {
     console.log('Mongoose default connection error: ' + err);
-    clearInterval(chronos);
+    //clearInterval(chronos);
 });
 
 // When the connection is disconnected
