@@ -71,8 +71,9 @@ app.listen(port, function () {
 mongoose.connection.on('open', () => {
     console.log('SPiDER Database is connected');
 
-    //pc.august();
-
+    pc.july()
+    pc.august();
+    pc.september();
 
 
 
@@ -93,12 +94,12 @@ mongoose.connection.on('open', () => {
 
 
     //Property Parser Job
-    parserJob.processProperty().then(value=>{
+   /*  parserJob.processProperty().then(value=>{
         console.log('DONE');
-        //parserJob.processPropertyPhotos();
+        parserJob.processPropertyPhotos();
     }).catch(err=>{
         console.error(err);
-    });
+    }); */
 
 
     //Entity Parser Job
