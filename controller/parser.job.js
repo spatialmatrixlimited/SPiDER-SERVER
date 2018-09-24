@@ -298,14 +298,14 @@ let processProperty = () => {
                             console.log(`${returned.length} street records for bulk processing...`);
                             console.log(`${returned.length} records for processing and save...`);
                             
-                            fetchUniqueData(docs, 'property').then(uniqueData => {
-                                UniqueProperty.insertMany(uniqueData, (err, returned) => {
+                            fetchUniqueData(returned, 'property').then(uniqueData => {
+                                UniqueProperty.insertMany(uniqueData, (err, inserted) => {
                                     if (err) {
                                         console.error(err);
                                         reject(err);
                                     } else {
-                                        if (returned) {
-                                            console.log(`${returned.length} unique property records processed and saved!`);
+                                        if (inserted) {
+                                            console.log(`${inserted.length} unique property records processed and saved!`);
                                             resolve(true);
                                         } else {
                                             console.log(`No data property returned`);
@@ -318,7 +318,7 @@ let processProperty = () => {
 
                         } else {
                             resolve(false);
-                            console.log('Nothing to process here (Street)');
+                            console.log('Nothing to process here (Property)');
                         }
                     });
                   
