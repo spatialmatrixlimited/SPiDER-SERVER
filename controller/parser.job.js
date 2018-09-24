@@ -128,7 +128,8 @@ let parseRecords = (docs, docType) => {
                     document_status: doc.document_status
                 }
                 index += 1;
-                console.log(`Processed document ${index} of ${docs.length}`)
+                console.log(`Processed document ${index} of ${docs.length}`);
+                console.log(newRecord.location.coordinates);
                 newRecords.push(newRecord);
 
             });
