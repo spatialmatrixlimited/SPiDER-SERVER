@@ -71,12 +71,6 @@ app.listen(port, function () {
 mongoose.connection.on('open', () => {
     console.log('SPiDER Database is connected');
 
-    pc.july()
-    pc.august();
-    pc.september();
-
-
-
     //User Parser Job
 
     /*  parserJob.processUser().then(value=>{
@@ -86,29 +80,29 @@ mongoose.connection.on('open', () => {
      }); */
 
     //Street Parser Job
-    /*  parserJob.processStreet().then(value=>{
+     parserJob.processStreet().then(value=>{
         parserJob.processStreetPhotos();
     }).catch(err=>{
         console.error(err);
-    }); */
+    });
 
 
     //Property Parser Job
-   /*  parserJob.processProperty().then(value=>{
+    parserJob.processProperty().then(value=>{
         console.log('DONE');
         parserJob.processPropertyPhotos();
     }).catch(err=>{
         console.error(err);
-    }); */
+    });
 
 
     //Entity Parser Job
-    /* parserJob.processEntity().then(value=>{
+    parserJob.processEntity().then(value=>{
         console.log('DONE: ' + value);
         parserJob.processEntityPhotos(); 
     }).catch(err=>{
         console.error(err);
-    }); */
+    });
 
 
 });

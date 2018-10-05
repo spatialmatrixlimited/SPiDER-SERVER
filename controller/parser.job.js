@@ -5,10 +5,6 @@ let EntityRecord = require('../model/entity.model');
 let User = require('../model/user.model');
 let ParsedUser = require('../model/parsed.user.model');
 
-let ParsedStreet = require('../model/parsed.street.model');
-let ParsedProperty = require('../model/parsed.property.model');
-let ParsedEntity = require('../model/parsed.entity.model');
-
 let UniqueStreet = require('../model/unique.street.model');
 let UniqueProperty = require('../model/unique.property.model');
 let UniqueEntity = require('../model/unique.entity.model');
@@ -238,7 +234,11 @@ let processUser = () => {
 let processStreet = () => {
     return new Promise((resolve, reject) => {
         console.log('Parser Engine Started - Street');
-        StreetRecord.find({}, (err, docs) => {
+        StreetRecord.find({
+            created: {
+                $gte: new Date("2018-09-24T00:00:00.000Z")
+            }
+        }, (err, docs) => {
             if (err) {
                 console.log('An error occured');
                 reject(err);
@@ -285,7 +285,11 @@ let processStreet = () => {
 let processProperty = () => {
     return new Promise((resolve, reject) => {
         console.log('Parser Engine Started - Property');
-        PropertyRecord.find({}, (err, docs) => {
+        PropertyRecord.find({
+            created: {
+                $gte: new Date("2018-09-24T00:00:00.000Z")
+            }
+        }, (err, docs) => {
             if (err) {
                 console.log('An error occured');
                 reject(err);
@@ -337,7 +341,11 @@ let processProperty = () => {
 let processEntity = () => {
     return new Promise((resolve, reject) => {
         console.log('Parser Engine Started - Entity');
-        EntityRecord.find({}, (err, docs) => {
+        EntityRecord.find({
+            created: {
+                $gte: new Date("2018-09-24T00:00:00.000Z")
+            }
+        }, (err, docs) => {
             if (err) {
                 console.log('An error occured');
                 reject(err);
@@ -383,7 +391,11 @@ let processEntity = () => {
 
 let processStreetPhotos = () => {
     console.log('Parser Engine Started - Street Photos');
-    UniqueStreet.find({}, (err, doc) => {
+    UniqueStreet.find({
+        created: {
+            $gte: new Date("2018-09-24T00:00:00.000Z")
+        }
+    }, (err, doc) => {
         if (err) {
             console.log('An error occured');
         } else {
@@ -433,7 +445,11 @@ let processStreetPhotos = () => {
 
 let processPropertyPhotos = () => {
     console.log('Parser Engine Started - Property Photos');
-    UniqueProperty.find({}, (err, doc) => {
+    UniqueProperty.find({
+        created: {
+            $gte: new Date("2018-09-24T00:00:00.000Z")
+        }
+    }, (err, doc) => {
         if (err) {
             console.log('An error occured');
         } else {
@@ -485,7 +501,11 @@ let processPropertyPhotos = () => {
 
 let processEntityPhotos = () => {
     console.log('Parser Engine Started - Entity Photos');
-    UniqueEntity.find({}, (err, doc) => {
+    UniqueEntity.find({
+        created: {
+            $gte: new Date("2018-09-24T00:00:00.000Z")
+        }
+    }, (err, doc) => {
         if (err) {
             console.log('An error occured');
         } else {
