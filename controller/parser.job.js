@@ -236,7 +236,7 @@ let processStreet = () => {
         console.log('Parser Engine Started - Street');
         StreetRecord.find({
             created: {
-                $gte: new Date("2018-09-24T00:00:00.000Z")
+                $gt: new Date("2018-09-24T00:00:00.000Z")
             }
         }, (err, docs) => {
             if (err) {
@@ -287,7 +287,7 @@ let processProperty = () => {
         console.log('Parser Engine Started - Property');
         PropertyRecord.find({
             created: {
-                $gte: new Date("2018-09-24T00:00:00.000Z")
+                $gt: new Date("2018-09-24T00:00:00.000Z")
             }
         }, (err, docs) => {
             if (err) {
@@ -343,7 +343,7 @@ let processEntity = () => {
         console.log('Parser Engine Started - Entity');
         EntityRecord.find({
             created: {
-                $gte: new Date("2018-09-24T00:00:00.000Z")
+                $gt: new Date("2018-09-24T00:00:00.000Z")
             }
         }, (err, docs) => {
             if (err) {
@@ -393,7 +393,7 @@ let processStreetPhotos = () => {
     console.log('Parser Engine Started - Street Photos');
     UniqueStreet.find({
         created: {
-            $gte: new Date("2018-09-24T00:00:00.000Z")
+            $gt: new Date("2018-09-24T00:00:00.000Z")
         }
     }, (err, doc) => {
         if (err) {
@@ -447,7 +447,7 @@ let processPropertyPhotos = () => {
     console.log('Parser Engine Started - Property Photos');
     UniqueProperty.find({
         created: {
-            $gte: new Date("2018-09-24T00:00:00.000Z")
+            $gt: new Date("2018-09-24T00:00:00.000Z")
         }
     }, (err, doc) => {
         if (err) {
@@ -503,7 +503,7 @@ let processEntityPhotos = () => {
     console.log('Parser Engine Started - Entity Photos');
     UniqueEntity.find({
         created: {
-            $gte: new Date("2018-09-24T00:00:00.000Z")
+            $gt: new Date("2018-09-24T00:00:00.000Z")
         }
     }, (err, doc) => {
         if (err) {
