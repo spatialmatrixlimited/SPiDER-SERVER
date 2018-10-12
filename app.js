@@ -80,11 +80,11 @@ mongoose.connection.on('open', () => {
      });
 
     //Street Parser Job
-     parserJob.processStreet().then(value=>{
+    /*  parserJob.processStreet().then(value=>{
         parserJob.processStreetPhotos();
     }).catch(err=>{
         console.error(err);
-    });
+    }); */
 
 
     //Property Parser Job
@@ -97,12 +97,12 @@ mongoose.connection.on('open', () => {
 
 
     //Entity Parser Job
-    parserJob.processEntity().then(value=>{
+    /* parserJob.processEntity().then(value=>{
         console.log('DONE: ' + value);
         parserJob.processEntityPhotos(); 
     }).catch(err=>{
         console.error(err);
-    });
+    }); */
 
 
 });
