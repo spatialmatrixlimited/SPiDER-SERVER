@@ -292,7 +292,7 @@ let processProperty = () => {
                         if (returned.length > 0) {
                             console.log(`${returned.length} street records for bulk processing...`);
                             console.log(`${returned.length} records for processing and save...`);
-                            
+
                             fetchUniqueData(returned, 'property').then(uniqueData => {
                                 UniqueProperty.insertMany(uniqueData, (err, inserted) => {
                                     if (err) {
@@ -306,7 +306,7 @@ let processProperty = () => {
                                             console.log(`No data property returned`);
                                             resolve(false);
                                         }
-        
+
                                     }
                                 });
                             });
@@ -316,7 +316,7 @@ let processProperty = () => {
                             console.log('Nothing to process here (Property)');
                         }
                     });
-                  
+
 
                 } else {
                     console.log("No street data to process");
@@ -377,155 +377,168 @@ let processEntity = () => {
 }
 
 let processStreetPhotos = () => {
-    console.log('Parser Engine Started - Street Photos');
-    UniqueStreet.find({}, (err, doc) => {
-        if (err) {
-            console.log('An error occured');
-        } else {
-            if (doc.length > 0) {
-                console.log(`${doc.length} STREET Records to Process`);
-                let newRecords = [];
-                let newRecord = {};
-                let photos;
-                let count = 0;
-                doc.forEach(_doc => {
-                    count += 1;
-                    photos = [];
-                    _doc.street_photos.forEach(photo => photos.push({
-                        url: photo.url,
-                        snapshot_position: photo.snapshot_position
-                    }));
-
-                    newRecord = {
-                        street: {
-                            street_id: _doc.street.street_id
-                        },
-                        street_photos: photos,
-                        created: _doc.created
-                    }
-
-                    newRecords.push(newRecord);
-
-                });
-
-                StreetPhoto.insertMany(newRecords, (err, docs) => {
-                    if (!err) {
-                        console.log('*************************************************************');
-                        console.log(`${docs.length} STREET PHOTO records parsed successfully!`);
-                        console.log('*************************************************************');
-                    } else {
-                        console.error(err);
-                    }
-                });
-
-
+    return new Promise((resolve) => {
+        console.log('Parser Engine Started - Street Photos');
+        UniqueStreet.find({}, (err, doc) => {
+            if (err) {
+                console.log('An error occured');
             } else {
-                console.log("No street data to process");
+                if (doc.length > 0) {
+                    console.log(`${doc.length} STREET Records to Process`);
+                    let newRecords = [];
+                    let newRecord = {};
+                    let photos;
+                    let count = 0;
+                    doc.forEach(_doc => {
+                        count += 1;
+                        photos = [];
+                        _doc.street_photos.forEach(photo => photos.push({
+                            url: photo.url,
+                            snapshot_position: photo.snapshot_position
+                        }));
+
+                        newRecord = {
+                            street: {
+                                street_id: _doc.street.street_id
+                            },
+                            street_photos: photos,
+                            created: _doc.created
+                        }
+
+                        newRecords.push(newRecord);
+
+                    });
+
+                    StreetPhoto.insertMany(newRecords, (err, docs) => {
+                        resolve();
+                        if (!err) {
+                            console.log('*************************************************************');
+                            console.log(`${docs.length} STREET PHOTO records parsed successfully!`);
+                            console.log('*************************************************************');
+                        } else {
+                            console.error(err);
+                        }
+                    });
+
+
+                } else {
+                    console.log("No street data to process");
+                    resolve();
+                }
             }
-        }
+        });
     });
 }
 
 let processPropertyPhotos = () => {
-    console.log('Parser Engine Started - Property Photos');
-    UniqueProperty.find({}, (err, doc) => {
-        if (err) {
-            console.log('An error occured');
-        } else {
-            if (doc.length > 0) {
-                console.log(`${doc.length} PROPERTY Records to Process`);
-                let newRecords = [];
-                let newRecord = {};
-                let photos;
-                let count = 0;
-                doc.forEach(_doc => {
-                    count += 1;
-                    photos = [];
-                    _doc.property_photos.forEach(photo => photos.push({
-                        url: photo.url,
-                        snapshot_position: photo.snapshot_position
-                    }));
-
-                    newRecord = {
-                        property: {
-                            property_id: _doc.property.property_id,
-                            street_id: _doc.property.street_id,
-                            building_serial_number: _doc.property.building_serial_number
-                        },
-                        property_photos: photos,
-                        created: _doc.created
-                    }
-
-                    newRecords.push(newRecord);
-
-                });
-
-                PropertyPhoto.insertMany(newRecords, (err, docs) => {
-                    if (!err) {
-                        console.log('*************************************************************');
-                        console.log(`${docs.length} PROPERTY PHOTO records parsed successfully!`);
-                        console.log('*************************************************************');
-                    } else {
-                        console.error(err);
-                    }
-                });
-
-
+    return new Promise(resolve => {
+        console.log('Parser Engine Started - Property Photos');
+        UniqueProperty.find({}, (err, doc) => {
+            if (err) {
+                console.log('An error occured');
             } else {
-                console.log("No property data to process");
+                if (doc.length > 0) {
+                    console.log(`${doc.length} PROPERTY Records to Process`);
+                    let newRecords = [];
+                    let newRecord = {};
+                    let photos;
+                    let count = 0;
+                    doc.forEach(_doc => {
+                        count += 1;
+                        photos = [];
+                        _doc.property_photos.forEach(photo => photos.push({
+                            url: photo.url,
+                            snapshot_position: photo.snapshot_position
+                        }));
+
+                        newRecord = {
+                            property: {
+                                property_id: _doc.property.property_id,
+                                street_id: _doc.property.street_id,
+                                building_serial_number: _doc.property.building_serial_number
+                            },
+                            property_photos: photos,
+                            created: _doc.created
+                        }
+
+                        newRecords.push(newRecord);
+
+                    });
+
+                    PropertyPhoto.insertMany(newRecords, (err, docs) => {
+                        if (!err) {
+                            console.log('*************************************************************');
+                            console.log(`${docs.length} PROPERTY PHOTO records parsed successfully!`);
+                            console.log('*************************************************************');
+                        } else {
+                            console.error(err);
+                        }
+                        resolve();
+                    });
+
+
+                } else {
+                    resolve();
+                    console.log("No property data to process");
+                }
             }
-        }
+        });
     });
+
 }
 
 let processEntityPhotos = () => {
-    console.log('Parser Engine Started - Entity Photos');
-    UniqueEntity.find({}, (err, doc) => {
-        if (err) {
-            console.log('An error occured');
-        } else {
-            if (doc.length > 0) {
-                console.log(`${doc.length} ENTITY Records to Process`);
-                let newRecords = [];
-                let newRecord = {};
-                let photos;
-                let count = 0;
-                doc.forEach(_doc => {
-                    count += 1;
-                    photos = [];
-                    _doc.property_photos.forEach(photo => photos.push({
-                        url: photo.url,
-                        snapshot_position: photo.snapshot_position
-                    }));
-
-                    newRecord = {
-                        entity: {
-                            entity_id: _doc.entity.entity_id,
-                            property_id: _doc.property_id
-                        },
-                        property_photos: photos,
-                        created: _doc.created
-                    }
-
-                    newRecords.push(newRecord);
-
-                });
-
-                EntityPhoto.insertMany(newRecords, (err, docs) => {
-                    if (!err) {
-                        console.log('*************************************************************');
-                        console.log(`${docs.length} ENTITY PHOTO records parsed successfully!`);
-                        console.log('*************************************************************');
-                    } else {
-                        console.error(err);
-                    }
-                });
-
-
+    return new Promise(resolve => {
+        console.log('Parser Engine Started - Entity Photos');
+        UniqueEntity.find({}, (err, doc) => {
+            if (err) {
+                console.log('An error occured');
             } else {
-                console.log("No property data to process");
+                if (doc.length > 0) {
+                    console.log(`${doc.length} ENTITY Records to Process`);
+                    let newRecords = [];
+                    let newRecord = {};
+                    let photos;
+                    let count = 0;
+                    doc.forEach(_doc => {
+                        count += 1;
+                        photos = [];
+                        _doc.property_photos.forEach(photo => photos.push({
+                            url: photo.url,
+                            snapshot_position: photo.snapshot_position
+                        }));
+
+                        newRecord = {
+                            entity: {
+                                entity_id: _doc.entity.entity_id,
+                                property_id: _doc.property_id
+                            },
+                            property_photos: photos,
+                            created: _doc.created
+                        }
+
+                        newRecords.push(newRecord);
+
+                    });
+
+                    EntityPhoto.insertMany(newRecords, (err, docs) => {
+                        if (!err) {
+                            console.log('*************************************************************');
+                            console.log(`${docs.length} ENTITY PHOTO records parsed successfully!`);
+                            console.log('*************************************************************');
+                        } else {
+                            console.error(err);
+                        }
+                        resolve();
+                    });
+
+
+                } else {
+                    console.log("No property data to process");
+                    resolve();
+                }
             }
-        }
+        });
     });
 }
 

@@ -71,38 +71,71 @@ app.listen(port, function () {
 mongoose.connection.on('open', () => {
     console.log('SPiDER Database is connected');
 
-    //User Parser Job
+    const doUser = () => {
+        return new Promise((resolve, reject) => {
+            //User Parser Job
+            parserJob.processUser().then(value => {
+                console.log(value.length + ' users saved successfully!');
+                resolve();
+            }).catch(err => {
+                console.error(err);
+                reject(err);
+            });
+        });
+    }
 
-     parserJob.processUser().then(value=>{
-         console.log(value.length + ' users saved successfully!');
-     }).catch(err=>{
-         console.error(err);
-     });
+    const doStreet = () => {
+        return new Promise((resolve, reject) => {
+            //Street Parser Job
+            parserJob.processStreet().then(value => {
+                parserJob.processStreetPhotos().then(() => {
+                    resolve();
+                });
+            }).catch(err => {
+                console.error(err);
+                reject(err);
+            });
+        });
+    }
 
-    //Street Parser Job
-    /*  parserJob.processStreet().then(value=>{
-        parserJob.processStreetPhotos();
-    }).catch(err=>{
-        console.error(err);
-    }); */
+    const doProperty = () => {
+        return new Promise((resolve, reject) => {
+            //Property Parser Job
+            parserJob.processProperty().then(value => {
+                console.log('DONE');
+                parserJob.processPropertyPhotos().then(() => {
+                    resolve();
+                });
+            }).catch(err => {
+                console.error(err);
+                reject(err);
+            });
+        });
+    }
 
+    const doEntity = () => {
+        return new Promise((resolve, reject) => {
+            //Entity Parser Job
+            parserJob.processEntity().then(value => {
+                console.log('DONE: ' + value);
+                parserJob.processEntityPhotos().then(() => {
+                    resolve();
+                });
+            }).catch(err => {
+                console.error(err);
+            });
+        });
+    }
 
-    //Property Parser Job
-    parserJob.processProperty().then(value=>{
-        console.log('DONE');
-        parserJob.processPropertyPhotos();
-    }).catch(err=>{
-        console.error(err);
-    });
-
-
-    //Entity Parser Job
-    /* parserJob.processEntity().then(value=>{
-        console.log('DONE: ' + value);
-        parserJob.processEntityPhotos(); 
-    }).catch(err=>{
-        console.error(err);
-    }); */
+    doUser().then(() => {
+        doStreet().then(() => {
+            doProperty().then(() => {
+                doEntity().then(() => {
+                    console.log('Task Completed!');
+                });
+            }).catch(console.log);
+        }).catch(console.log);
+    }).catch(console.log);
 
 
 });
