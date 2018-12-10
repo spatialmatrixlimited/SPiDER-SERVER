@@ -14,7 +14,7 @@ var pc = require('./controller/parser.controller');
 var port = process.env.PORT || 6111;
 
 mongoose.Promise = global.Promise;
-mongoose.connect(config.database, {
+mongoose.connect(config.database.mlab, {
     useMongoClient: true,
     config: {
         autoIndex: false
