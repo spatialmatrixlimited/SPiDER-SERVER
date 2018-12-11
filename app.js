@@ -126,6 +126,10 @@ mongoose.connection.on('open', () => {
             });
         });
     }
+
+    doEntity().then(() => {
+        console.log('Task Completed!');
+    });
 /* 
     doUser().then(() => {
         doStreet().then(() => {
