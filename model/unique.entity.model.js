@@ -57,4 +57,4 @@ var uniqueEntitySchema = new UniqueEntitySchema({
 });
 
 
-module.exports = mongoose.model('UniqueEntity', uniqueEntitySchema, 'spider_entities');
+module.exports = mongoose.model('UniqueEntity', uniqueEntitySchema, 'spider_entities_dec');
