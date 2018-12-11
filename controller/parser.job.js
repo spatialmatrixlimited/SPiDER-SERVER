@@ -144,7 +144,7 @@ let parseRecords = (docs, docType) => {
                 }));
 
                 let entity = doc.entity;
-                entity.category = entity.categories.toString();
+                entity.category = entity.categories ? entity.categories.toString() : 'N/A';
                 delete entity.categories;
                 
                 newRecord = {
