@@ -71,7 +71,7 @@ app.listen(port, function () {
 mongoose.connection.on('open', () => {
     console.log('SPiDER Database is connected');
 
-    const doUser = () => {
+  /*   const doUser = () => {
         return new Promise((resolve, reject) => {
             //User Parser Job
             parserJob.processUser().then(value => {
@@ -111,7 +111,7 @@ mongoose.connection.on('open', () => {
                 reject(err);
             });
         });
-    }
+    } */
 
     const doEntity = () => {
         return new Promise((resolve, reject) => {
@@ -126,7 +126,7 @@ mongoose.connection.on('open', () => {
             });
         });
     }
-
+/* 
     doUser().then(() => {
         doStreet().then(() => {
             doProperty().then(() => {
@@ -135,7 +135,7 @@ mongoose.connection.on('open', () => {
                 });
             }).catch(console.log);
         }).catch(console.log);
-    }).catch(console.log);
+    }).catch(console.log); */
 
 
 });

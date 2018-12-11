@@ -143,15 +143,18 @@ let parseRecords = (docs, docType) => {
                     snapshot_position: photo.snapshot_position
                 }));
 
+                let entity = doc.entity;
+                entity.category = entity.categories.toString();
+                delete entity.categories;
+                
                 newRecord = {
                     'property_id': doc.property_id,
-                    'entity': doc.entity,
+                    'entity': entity,
                     'property_photos': photos,
                     'created': doc.created,
                     'modified': doc.modified,
                     'modified_by': doc.modified_by,
                     'entities': doc.entities,
-
                     'location': {
                         'type': doc.location.type,
                         'coordinates': {
