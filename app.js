@@ -8,13 +8,13 @@ var headers = require('./middleware/headers');
 var mongoose = require('mongoose');
 var cors = require('cors');
 var morgan = require('morgan');
-var parserJob = require('./controller/parser.job');
+// var parserJob = require('./controller/parser.job');
 var pc = require('./controller/parser.controller');
 
 var port = process.env.PORT || 6111;
 
 mongoose.Promise = global.Promise;
-mongoose.connect(config.database.mlab, {
+mongoose.connect(config.database.mlab1, {
     useMongoClient: true,
     config: {
         autoIndex: false
@@ -113,7 +113,7 @@ mongoose.connection.on('open', () => {
         });
     } */
 
-    const doEntity = () => {
+    /* const doEntity = () => {
         return new Promise((resolve, reject) => {
             //Entity Parser Job
             parserJob.processEntity().then(value => {
@@ -129,7 +129,7 @@ mongoose.connection.on('open', () => {
 
     doEntity().then(() => {
         console.log('Task Completed!');
-    });
+    }); */
 /* 
     doUser().then(() => {
         doStreet().then(() => {
